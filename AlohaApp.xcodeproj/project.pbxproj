@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0BE58D662D3DE8870052EFD5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D652D3DE8870052EFD5 /* FirebaseAnalytics */; };
+		0BE58D682D3DE8870052EFD5 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D672D3DE8870052EFD5 /* FirebaseAppCheck */; };
+		0BE58D6A2D3DE8870052EFD5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D692D3DE8870052EFD5 /* FirebaseAuth */; };
+		0BE58D6C2D3DE8870052EFD5 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D6B2D3DE8870052EFD5 /* FirebaseCore */; };
+		0BE58D6E2D3DE8870052EFD5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D6D2D3DE8870052EFD5 /* FirebaseDatabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		0BE58D422D3DE34F0052EFD5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +37,30 @@
 		0BE58D4B2D3DE34F0052EFD5 /* AlohaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlohaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0BE58D622D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info.plist",
+			);
+			target = 0BE58D402D3DE34F0052EFD5 /* AlohaAppTests */;
+		};
+		0BE58D632D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"GoogleService-Info.plist",
+			);
+			target = 0BE58D4A2D3DE34F0052EFD5 /* AlohaAppUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0BE58D322D3DE34E0052EFD5 /* AlohaApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0BE58D622D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppTests" target */,
+				0BE58D632D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppUITests" target */,
+			);
 			path = AlohaApp;
 			sourceTree = "<group>";
 		};
@@ -52,6 +81,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BE58D6E2D3DE8870052EFD5 /* FirebaseDatabase in Frameworks */,
+				0BE58D682D3DE8870052EFD5 /* FirebaseAppCheck in Frameworks */,
+				0BE58D6A2D3DE8870052EFD5 /* FirebaseAuth in Frameworks */,
+				0BE58D6C2D3DE8870052EFD5 /* FirebaseCore in Frameworks */,
+				0BE58D662D3DE8870052EFD5 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +146,11 @@
 			);
 			name = AlohaApp;
 			packageProductDependencies = (
+				0BE58D652D3DE8870052EFD5 /* FirebaseAnalytics */,
+				0BE58D672D3DE8870052EFD5 /* FirebaseAppCheck */,
+				0BE58D692D3DE8870052EFD5 /* FirebaseAuth */,
+				0BE58D6B2D3DE8870052EFD5 /* FirebaseCore */,
+				0BE58D6D2D3DE8870052EFD5 /* FirebaseDatabase */,
 			);
 			productName = AlohaApp;
 			productReference = 0BE58D302D3DE34E0052EFD5 /* AlohaApp.app */;
@@ -195,6 +234,9 @@
 			);
 			mainGroup = 0BE58D272D3DE34E0052EFD5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0BE58D312D3DE34E0052EFD5 /* Products */;
 			projectDirPath = "";
@@ -414,10 +456,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordankopp.AlohaApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.1;
 			};
 			name = Debug;
@@ -453,10 +496,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordankopp.AlohaApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.1;
 			};
 			name = Release;
@@ -591,6 +635,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0BE58D652D3DE8870052EFD5 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		0BE58D672D3DE8870052EFD5 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		0BE58D692D3DE8870052EFD5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		0BE58D6B2D3DE8870052EFD5 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		0BE58D6D2D3DE8870052EFD5 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0BE58D282D3DE34E0052EFD5 /* Project object */;
 }
