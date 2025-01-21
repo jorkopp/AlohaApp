@@ -40,8 +40,107 @@ struct ClientDetailsView: View {
                             clientViewModel.phoneNumber = formatPhoneNumber(newValue)
                         })
                 }
+                emailField()
+            }
+            Section(header: Text("Property Info")) {
+                addressField()
+                houseYearField()
+                gateCodeField()
+                lotSizeField()
+                purchaseYearField()
+            }
+            Section(header: Text("Other")) {
+                foundUsField()
+                phoneEstimateField()
+                notesField()
             }
         }
+    }
+    
+    @ViewBuilder
+    func emailField() -> some View {
+        TextField("Email", text: $clientViewModel.email)
+            .disabled(disableEdits)
+            .autocorrectionDisabled(true)
+            .keyboardType(.emailAddress)
+    }
+    
+    @ViewBuilder
+    func addressField() -> some View {
+        TextField("Address", text: $clientViewModel.address)
+            .disabled(disableEdits)
+    }
+    
+    //TODO: fix display
+    @ViewBuilder
+    func houseYearField() -> some View {
+        if disableEdits {
+            TextField("House Year", value: $clientViewModel.houseYear, format: .number.grouping(.never))
+                .disabled(disableEdits)
+        } else {
+            Picker("House Year", selection: $clientViewModel.houseYear) {
+                ForEach(1950...2025, id: \.self) {
+                    Text(String($0))
+                }
+                .pickerStyle(.wheel)
+            }
+        }
+    }
+    
+    //TODO: fix display
+    @ViewBuilder
+    func gateCodeField() -> some View {
+        TextField("Gate Code", value: $clientViewModel.gateCode, format: .number.grouping(.never))
+            .disabled(disableEdits)
+            .keyboardType(.numberPad)
+    }
+    
+    //TODO: fix display
+    @ViewBuilder
+    func lotSizeField() -> some View {
+        TextField("Lot Size", value: $clientViewModel.lotSqft, format: .number.grouping(.never))
+            .disabled(disableEdits)
+            .keyboardType(.numberPad)
+            
+    }
+    
+    //TODO: fix display
+    @ViewBuilder
+    func purchaseYearField() -> some View {
+        TextField("Purchase Year", value: $clientViewModel.purchaseYear, format: .number.grouping(.never))
+            .disabled(disableEdits)
+            .keyboardType(.numberPad)
+    }
+    
+    //fix picker, create enum
+    @ViewBuilder
+    func foundUsField() -> some View {
+        if disableEdits {
+            TextField("Found Us", text: $clientViewModel.foundUs)
+                .disabled(disableEdits)
+        } else {
+            Picker("Found Us", selection: $clientViewModel.foundUs) {
+                ForEach(1950...2025, id: \.self) {
+                    Text(String($0))
+                }
+                .pickerStyle(.wheel)
+            }
+        }
+    }
+    
+    //TODO: fix display
+    @ViewBuilder
+    func phoneEstimateField() -> some View {
+        TextField("Phone Estimate", value: $clientViewModel.phoneEstimate, format: .number.grouping(.never))
+            .disabled(disableEdits)
+            .keyboardType(.numberPad)
+    }
+    
+    //TODO: convert to texteditor
+    @ViewBuilder
+    func notesField() -> some View {
+        TextField("Notes", text: $clientViewModel.notes)
+            .disabled(disableEdits)
     }
     
     // Helper function to format the phone number

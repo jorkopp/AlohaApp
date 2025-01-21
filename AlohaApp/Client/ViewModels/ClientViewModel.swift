@@ -13,6 +13,15 @@ class ClientViewModel: Hashable {
     var id: String
     var name: String
     var phoneNumber: String
+    var email: String = ""
+    var address: String = ""
+    var houseYear: Int = 0
+    var gateCode: Int = 0
+    var lotSqft: Int = 0
+    var purchaseYear: Int = 0
+    var foundUs: String = ""
+    var phoneEstimate: Int = 0
+    var notes: String = ""
 
     private let ref = Database.database().reference(withPath: "clients")
     
