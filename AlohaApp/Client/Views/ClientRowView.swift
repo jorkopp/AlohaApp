@@ -9,9 +9,9 @@ import SwiftUI
 
 @MainActor
 struct ClientRowView: View {
-    let name: String
+    let clientViewModel: ClientViewModel
     
     var body: some View {
-        Text(name)
+        Text(clientViewModel.name)
     }
 }

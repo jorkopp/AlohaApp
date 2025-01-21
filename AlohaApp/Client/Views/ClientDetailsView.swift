@@ -7,11 +7,11 @@
 
 import SwiftUI
 
+@MainActor
 struct ClientDetailsView: View {
     @Environment(\.editMode) private var editMode
     
-    @State var name: String
-    @State var phoneNumber: String = ""
+    @State var clientViewModel: ClientViewModel
     
     private var disableEdits: Bool {
         !(editMode?.wrappedValue.isEditing ?? false)
@@ -20,23 +20,24 @@ struct ClientDetailsView: View {
     var body: some View {
         Form {
             Section(header: Text("Contact Info")) {
-                TextField("Name", text: $name)
+                TextField("Name", text: $clientViewModel.name)
                     .disabled(disableEdits)
-                
+                    .autocorrectionDisabled(true)
+                    .autocapitalization(UITextAutocapitalizationType.words)
                 if disableEdits {
                     Button {
-                        let phoneLink = "tel://" + phoneNumber.trimmingCharacters(in: .whitespaces)
+                        let phoneLink = "tel://" + clientViewModel.phoneNumber.trimmingCharacters(in: .whitespaces)
                         if let url = URL(string: phoneLink) {
                             UIApplication.shared.open(url)
                         }
                     } label: {
-                        Text(phoneNumber)
+                        Text(clientViewModel.phoneNumber)
                     }
                 } else {
-                    TextField("(555) 555-5555", text: $phoneNumber)
+                    TextField("(555) 555-5555", text: $clientViewModel.phoneNumber)
                         .keyboardType(.numberPad)
-                        .onChange(of: phoneNumber, { _, newValue in
-                            phoneNumber = formatPhoneNumber(newValue)
+                        .onChange(of: clientViewModel.phoneNumber, { _, newValue in
+                            clientViewModel.phoneNumber = formatPhoneNumber(newValue)
                         })
                 }
             }

@@ -7,21 +7,24 @@
 
 import SwiftUI
 
+@MainActor
 struct NewClientDetailsView: View {
     @Environment(\.editMode) private var editMode
     @Environment(\.dismiss) private var dismiss
     
-    @State var name: String
+    var clientViewModel: ClientViewModel
     
     var body: some View {
-        ClientDetailsView(name: name)
+        ClientDetailsView(clientViewModel: clientViewModel)
             .environment(\.editMode, Binding.constant(EditMode.active))
             .navigationTitle("New Client")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        // TODO: Persist
-                        dismiss()
+                        if clientViewModel.isValid {
+                            clientViewModel.saveChanges()
+                            dismiss()
+                        }
                     }
                 }
                 
