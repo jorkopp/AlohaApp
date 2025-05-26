@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: Update all fields to use localClient when isEditing
-
 @MainActor
 struct ClientDetailsView: View {
     @Environment(\.editMode) private var editMode
@@ -29,25 +27,25 @@ struct ClientDetailsView: View {
         Form {
             Section(header: Text("Contact Info")) {
                 RequiredField(isEditing: isEditing) {
-                    nameField()
+                    nameField("Name")
                 }
                 RequiredField(isEditing: isEditing) {
-                    phoneNumberField()
+                    phoneNumberField("Phone")
                 }
                 RequiredField(isEditing: isEditing) {
-                    emailField()
+                    emailField("Email")
                 }
-                foundUsField()
+                foundUsField("Found Us")
             }
             Section(header: Text("Property Info")) {
                 RequiredField(isEditing: isEditing) {
-                    addressField()
+                    addressField("Address")
                 }
-                houseYearField()
-                purchaseYearField()
-                lotSizeField()
-                gateCodeField()
-                phoneEstimateField()
+                houseYearField("House Year Built")
+                purchaseYearField("Purchase Year")
+                lotSizeField("Lot Size (sq ft)")
+                gateCodeField("Gate Code")
+                phoneEstimateField("Phone Estimate")
             }
             Section(header: Text("Notes")) {
                 notesField()
@@ -67,34 +65,29 @@ struct ClientDetailsView: View {
     }
     
     @ViewBuilder
-    func nameField() -> some View {
+    func nameField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Name") {
-                TextField("Name", text: $localClient.name)
-                    .multilineTextAlignment(.trailing)
-                    .autocorrectionDisabled(true)
-                    .autocapitalization(UITextAutocapitalizationType.words)
-            }
+            LabeledTextField(label: label, placeholder: "John Doe", value: $localClient.name)
         } else {
-            LabeledContent("Name") {
+            LabeledContent(label) {
                 Text(client.name)
             }
         }
     }
     
     @ViewBuilder
-    func phoneNumberField() -> some View {
+    func phoneNumberField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Phone") {
+            LabeledContent(label) {
                 TextField("(555) 555-5555", text: $localClient.phoneNumber)
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.numberPad)
-                    .onChange(of: client.phoneNumber, { _, newValue in
-                        client.phoneNumber = formatPhoneNumber(newValue)
+                    .onChange(of: localClient.phoneNumber, { _, newValue in
+                        localClient.phoneNumber = formatPhoneNumber(newValue)
                     })
             }
         } else {
-            LabeledContent("Phone") {
+            LabeledContent(label) {
                 Button {
                     let phoneLink = "tel://" + client.phoneNumber.trimmingCharacters(in: .whitespaces)
                     if let url = URL(string: phoneLink) {
@@ -109,16 +102,16 @@ struct ClientDetailsView: View {
     }
     
     @ViewBuilder
-    func emailField() -> some View {
+    func emailField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Email") {
-                TextField("Email", text: $localClient.email)
+            LabeledContent(label) {
+                TextField("johndoe@gmail.com", text: $localClient.email)
                     .multilineTextAlignment(.trailing)
                     .autocorrectionDisabled(true)
                     .keyboardType(.emailAddress)
             }
         } else {
-            LabeledContent("Email") {
+            LabeledContent(label) {
                 Button {
                     let emailLink = "mailto:" + client.email
                     if let url = URL(string: emailLink) {
@@ -133,15 +126,11 @@ struct ClientDetailsView: View {
     }
     
     @ViewBuilder
-    func addressField() -> some View {
+    func addressField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Address") {
-                TextField("Address", text: $localClient.address)
-                    .autocorrectionDisabled(true)
-                    .multilineTextAlignment(.trailing)
-            }
+            LabeledTextField(label: label, placeholder: "123 Main Street", value: $localClient.address)
         } else {
-            LabeledContent("Address") {
+            LabeledContent(label) {
                 Button {
                     let encodedAddress = client.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                     let addressLink = "https://maps.apple.com/place?address=" + encodedAddress
@@ -157,43 +146,33 @@ struct ClientDetailsView: View {
     }
     
     @ViewBuilder
-    func houseYearField() -> some View {
+    func houseYearField(_ label: String) -> some View {
         if isEditing {
-            YearPicker(title: "House Year Built", selectedYear: $localClient.houseYearBuilt)
+            YearPicker(title: label, selectedYear: $localClient.houseYearBuilt)
         } else {
-            LabeledContent("House Year Built") {
+            LabeledContent(label) {
                 Text(client.houseYearBuilt.map(String.init) ?? "")
             }
         }
     }
     
     @ViewBuilder
-    func gateCodeField() -> some View {
+    func gateCodeField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Gate Code") {
-                TextField("e.g. 1234", text: $localClient.gateCode)
-                    .multilineTextAlignment(.trailing)
-            }
+            LabeledTextField(label: label, placeholder: "e.g. 1234", value: $localClient.gateCode)
         } else {
-            LabeledContent("Gate Code") {
+            LabeledContent(label) {
                 Text(client.gateCode)
             }
         }
     }
     
     @ViewBuilder
-    func lotSizeField() -> some View {
+    func lotSizeField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Lot Size (sq ft)") {
-                TextField("e.g. 5000", text: $localClient.lotSqft)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.numberPad)
-                    .onChange(of: client.lotSqft) { _, newValue in
-                        client.lotSqft = newValue.filter { $0.isNumber }
-                    }
-            }
+            LabeledNumberField(label: label, placeholder: "e.g. 5000", value: $localClient.lotSqft)
         } else {
-            LabeledContent("Lot Size (sq ft)") {
+            LabeledContent(label) {
                 Text(client.lotSqft)
             }
         }
@@ -201,45 +180,33 @@ struct ClientDetailsView: View {
     }
     
     @ViewBuilder
-    func purchaseYearField() -> some View {
+    func purchaseYearField(_ label: String) -> some View {
         if isEditing {
-            YearPicker(title: "Purchase Year", selectedYear: $localClient.purchaseYear)
+            YearPicker(title: label, selectedYear: $localClient.purchaseYear)
         } else {
-            LabeledContent("Purchase Year") {
+            LabeledContent(label) {
                 Text(client.purchaseYear.map(String.init) ?? "")
             }
         }
     }
     
     @ViewBuilder
-    func foundUsField() -> some View {
+    func foundUsField(_ label: String) -> some View {
         if isEditing {
-            Picker("Found Us", selection: $localClient.foundUs) {
-                Text("Select option").tag(Optional<FoundUs>.none)
-                ForEach(FoundUs.allCases) {
-                    Text($0.rawValue).tag(Optional($0))
-                }
-            }
+            OptionPicker(label: label, selection: $localClient.foundUs)
         } else {
-            LabeledContent("Found Us") {
+            LabeledContent(label) {
                 Text(client.foundUs?.rawValue ?? "")
             }
         }
     }
     
     @ViewBuilder
-    func phoneEstimateField() -> some View {
+    func phoneEstimateField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Phone Estimate") {
-                TextField("$$$", text: $localClient.phoneEstimate)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.numberPad)
-                    .onChange(of: client.phoneEstimate) { _, newValue in
-                        client.phoneEstimate = newValue.filter { $0.isNumber }
-                    }
-            }
+            LabeledNumberField(label: label, placeholder: "$$$", value: $localClient.phoneEstimate)
         } else {
-            LabeledContent("Phone Estimate") {
+            LabeledContent(label) {
                 Text(client.phoneEstimate)
             }
         }
@@ -269,36 +236,6 @@ struct ClientDetailsView: View {
         default:
             let middleNumber = cleanedPhoneNumber[cleanedPhoneNumber.index(cleanedPhoneNumber.startIndex, offsetBy: 3)..<cleanedPhoneNumber.index(cleanedPhoneNumber.startIndex, offsetBy: 6)]
             return "(\(cleanedPhoneNumber.prefix(3))) \(middleNumber)-\(cleanedPhoneNumber.suffix((numberOfDigits - 6)))"
-        }
-    }
-}
-
-public struct RequiredField<Content: View>: View {
-    let isEditing: Bool
-    let content: () -> Content
-
-    public var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 2) {
-            content()
-            if isEditing {
-                Text("*")
-                    .foregroundColor(.red)
-            }
-        }
-    }
-}
-
-public struct YearPicker: View {
-    let title: String
-    
-    @Binding var selectedYear: Int?
-
-    public var body: some View {
-        Picker(title, selection: $selectedYear) {
-            Text("Select year").tag(nil as Int?)
-            ForEach((1800...Calendar.current.component(.year, from: Date())).reversed(), id: \.self) { year in
-                Text(String(year)).tag(Optional(year))
-            }
         }
     }
 }

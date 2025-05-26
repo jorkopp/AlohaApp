@@ -28,7 +28,7 @@ struct InventoryItemDetailsView: View {
             RequiredField(isEditing: isEditing) {
                 nameField()
             }
-            countField()
+            countField("Count")
         }
         .onChange(of: isEditing) { oldValue, newValue in
             guard oldValue != newValue else { return }
@@ -60,9 +60,9 @@ struct InventoryItemDetailsView: View {
     }
     
     @ViewBuilder
-    func countField() -> some View {
-        // TODO: Number pad input instead?
+    func countField(_ label: String) -> some View {
         if isEditing {
+//            LabeledNumberField(label: label, placeholder: "", value: <#T##Binding<String>#>)
             Stepper("Count: \(localInventoryItem.count)", value: $localInventoryItem.count, in: 0...100)
         } else {
             LabeledContent("Count") {

@@ -16,7 +16,7 @@ public enum PlantDensity: String, CaseIterable, Identifiable, Codable {
     public var id: String { self.rawValue }
 }
     
-public enum Difficulty: String, CaseIterable, Identifiable, Codable {
+public enum AccessDifficulty: String, CaseIterable, Identifiable, Codable {
     case Easy
     case Hard
     
@@ -38,12 +38,12 @@ final public class Estimate: Item, Codable, Hashable {
     public var uuid: String
     
     public var plantDensity: PlantDensity?
-    public var lights: Int?
-    public var access: Difficulty?
-    public var valves: Int?
+    public var lights: String
+    public var access: AccessDifficulty?
+    public var valves: String
     public var timer: Timer?
     public var demo: String
-    public var coupon: String
+    public var coupon: Bool
     public var plantPackage: String
     public var rockRefresh: String
     public var requests: String
@@ -52,7 +52,7 @@ final public class Estimate: Item, Codable, Hashable {
         case uuid, plantDensity, lights, access, valves, timer, demo, coupon, plantPackage, rockRefresh, requests
     }
     
-    public init(uuid: String, plantDensity: PlantDensity?, lights: Int?, access: Difficulty?, valves: Int?, timer: Timer?, demo: String, coupon: String, plantPackage: String, rockRefresh: String, requests: String) {
+    public init(uuid: String, plantDensity: PlantDensity?, lights: String, access: AccessDifficulty?, valves: String, timer: Timer?, demo: String, coupon: Bool, plantPackage: String, rockRefresh: String, requests: String) {
         self.uuid = uuid
         self.plantDensity = plantDensity
         self.lights = lights
@@ -67,11 +67,11 @@ final public class Estimate: Item, Codable, Hashable {
     }
     
     public static func newItem() -> Estimate {
-        Estimate(uuid: UUID().uuidString, plantDensity: nil, lights: nil, access: nil, valves: nil, timer: nil, demo:"", coupon: "", plantPackage: "", rockRefresh: "", requests: "")
+        Estimate(uuid: UUID().uuidString, plantDensity: nil, lights: "", access: nil, valves: "", timer: nil, demo:"", coupon: false, plantPackage: "", rockRefresh: "", requests: "")
     }
     
     public func isValid() -> Bool {
-        lights != nil && plantDensity != nil && access != nil && valves != nil
+        plantDensity != nil && access != nil && timer != nil && !valves.isEmpty
     }
     
     // MARK: Sortable
@@ -97,12 +97,12 @@ final public class Estimate: Item, Codable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.uuid = try container.decode(String.self, forKey: .uuid)
         self.plantDensity = try container.decodeIfPresent(PlantDensity.self, forKey: .plantDensity)
-        self.lights = try container.decode(Int.self, forKey: .lights)
-        self.access = try container.decodeIfPresent(Difficulty.self, forKey: .access)
-        self.valves = try container.decode(Int.self, forKey: .valves)
+        self.lights = try container.decode(String.self, forKey: .lights)
+        self.access = try container.decodeIfPresent(AccessDifficulty.self, forKey: .access)
+        self.valves = try container.decode(String.self, forKey: .valves)
         self.timer = try container.decodeIfPresent(Timer.self, forKey: .timer)
         self.demo = try container.decode(String.self, forKey: .demo)
-        self.coupon = try container.decode(String.self, forKey: .coupon)
+        self.coupon = try container.decode(Bool.self, forKey: .coupon)
         self.plantPackage = try container.decode(String.self, forKey: .plantPackage)
         self.rockRefresh = try container.decode(String.self, forKey: .rockRefresh)
         self.requests = try container.decode(String.self, forKey: .requests)
