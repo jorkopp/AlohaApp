@@ -8,13 +8,13 @@
 import FirebaseDatabase
 
 extension Database {
-  class var root: DatabaseReference {
-    return database().reference()
-  }
+    class var root: DatabaseReference {
+        return database().reference()
+    }
 }
 
 extension DataSnapshot {
-    var valueAsDictionary: [String: Any] {
-        return value as! [String: Any]
+    var valueAsDictionary: [String: Any]? {
+        return value as? [String: Any]
     }
 }

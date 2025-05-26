@@ -1,29 +1,34 @@
 //
-//  NewClientDetailsView.swift
+//  NewEstimateView.swift
 //  AlohaApp
 //
 //  Created by Jordan Kopp on 1/19/25.
 //
 
 import SwiftUI
+import FirebaseDatabaseInternal
 
 @MainActor
-struct NewClientDetailsView: View {
+struct NewEstimateView: View {
     @Environment(\.editMode) private var editMode
     @Environment(\.dismiss) private var dismiss
     
-    var clientViewModel: ClientViewModel
+    let estimateItemListManager: ItemListManager<Estimate>
+    
+    private let estimate = Estimate.newItem()
     
     var body: some View {
-        ClientDetailsView(clientViewModel: clientViewModel)
+        EstimateView(estimate: estimate)
             .environment(\.editMode, Binding.constant(EditMode.active))
-            .navigationTitle("New Client")
+            .navigationTitle("New Estimate")
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        if clientViewModel.isValid {
-                            clientViewModel.saveChanges()
+                        if estimate.isValid() {
+                            estimateItemListManager.save(estimate)
                             dismiss()
+                        } else {
+                            
                         }
                     }
                 }

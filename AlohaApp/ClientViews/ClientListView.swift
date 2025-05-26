@@ -11,23 +11,22 @@ import SwiftUI
 struct ClientListView: View {
     @State var isAddingNewClient = false
     
-    @State var clientListViewModel: ClientListViewModel
+    let clientItemListManager: ItemListManager<Client>
     
     var body: some View {
         Group {
             List {
-                ForEach(clientListViewModel.sortedClients, id: \.self) { clientViewModel in
+                ForEach(clientItemListManager.items, id: \.self) { client in
                     NavigationLink {
-                        EditableClientDetailsView(clientViewModel: clientViewModel)
+                        EditableClientView(clientItemListManager: clientItemListManager, client: client)
                     } label: {
-                        ClientRowView(clientViewModel: clientViewModel)
+                        ClientRowView(client: client)
                     }
                 }
                 .onDelete { indexSet in
                     for index in indexSet {
-                        let clientViewModelToDelete = clientListViewModel.sortedClients[index]
-                        clientViewModelToDelete.delete()
-                        clientListViewModel.clientViewModelsByClientID.removeValue(forKey: clientViewModelToDelete.id)
+                        let clientToDelete = clientItemListManager.items[index]
+                        clientItemListManager.delete(clientToDelete)
                     }
                 }
             }
@@ -35,8 +34,10 @@ struct ClientListView: View {
         .navigationTitle("Clients")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem {
-                EditButton()
+            if !clientItemListManager.items.isEmpty {
+                ToolbarItem {
+                    EditButton()
+                }
             }
             ToolbarItem {
                 Button {
@@ -47,11 +48,11 @@ struct ClientListView: View {
             }
         }
         .onAppear {
-            clientListViewModel.startFetchingClientData()
+            clientItemListManager.startFetchingItems()
         }
         .sheet(isPresented: $isAddingNewClient) {
             NavigationStack {
-                NewClientDetailsView(clientViewModel: ClientViewModel.newClientViewModel())
+                NewClientView(clientItemListManager: clientItemListManager)
             }
         }
     }

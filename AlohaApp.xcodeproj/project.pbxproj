@@ -37,30 +37,9 @@
 		0BE58D4B2D3DE34F0052EFD5 /* AlohaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlohaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0BE58D622D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"GoogleService-Info.plist",
-			);
-			target = 0BE58D402D3DE34F0052EFD5 /* AlohaAppTests */;
-		};
-		0BE58D632D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"GoogleService-Info.plist",
-			);
-			target = 0BE58D4A2D3DE34F0052EFD5 /* AlohaAppUITests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		0BE58D322D3DE34E0052EFD5 /* AlohaApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				0BE58D622D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppTests" target */,
-				0BE58D632D3DE72F0052EFD5 /* Exceptions for "AlohaApp" folder in "AlohaAppUITests" target */,
-			);
 			path = AlohaApp;
 			sourceTree = "<group>";
 		};
