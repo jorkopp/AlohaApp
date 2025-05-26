@@ -273,11 +273,11 @@ struct ClientDetailsView: View {
     }
 }
 
-struct RequiredField<Content: View>: View {
+public struct RequiredField<Content: View>: View {
     let isEditing: Bool
     let content: () -> Content
 
-    var body: some View {
+    public var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
             content()
             if isEditing {

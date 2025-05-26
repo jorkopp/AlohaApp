@@ -12,6 +12,7 @@ struct ContentView: View {
 //    private let clientsViewModel = ClientsViewModel()
     private let clientItemListManager = ItemListManager<Client>()
     private let estimateItemListManager = ItemListManager<Estimate>()
+    private let inventoryItemListManager = ItemListManager<InventoryItem>()
     
     //TODO: fix add button not visible from tab view
     var body: some View {
@@ -34,6 +35,15 @@ struct ContentView: View {
                 }            }
             .tabItem {
                 Label("Estimates", systemImage: "dollarsign.square.fill")
+            }
+            NavigationStack {
+                ItemListView(title: "Inventory", itemListManager: inventoryItemListManager) { item in
+                    InventoryItemRowView(inventoryItem: item)
+                } detailsContent: { item in
+                    InventoryItemDetailsView(inventoryItem: item)
+                }            }
+            .tabItem {
+                Label("Inventory", systemImage: "truck.box")
             }
         }
     }
