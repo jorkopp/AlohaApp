@@ -37,10 +37,12 @@ struct ClientDetailsView: View {
                 }
                 foundUsField("Found Us")
             }
-            Section(header: Text("Property Info")) {
+            Section(header: Text("Property Address")) {
                 RequiredField(isEditing: isEditing) {
-                    addressField("Address")
+                    addressField()
                 }
+            }
+            Section(header: Text("Property Info")) {
                 houseYearField("House Year Built")
                 purchaseYearField("Purchase Year")
                 lotSizeField("Lot Size (sq ft)")
@@ -126,21 +128,18 @@ struct ClientDetailsView: View {
     }
     
     @ViewBuilder
-    func addressField(_ label: String) -> some View {
+    func addressField() -> some View {
         if isEditing {
-            LabeledTextField(label: label, placeholder: "123 Main Street", value: $localClient.address)
+            TextEditor(text: $localClient.address)
         } else {
-            LabeledContent(label) {
-                Button {
-                    let encodedAddress = client.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                    let addressLink = "https://maps.apple.com/place?address=" + encodedAddress
-                    if let url = URL(string: addressLink) {
-                        UIApplication.shared.open(url)
-                    }
-                } label: {
-                    Text(client.address)
+            Button {
+                let encodedAddress = client.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                let addressLink = "https://maps.apple.com/place?address=" + encodedAddress
+                if let url = URL(string: addressLink) {
+                    UIApplication.shared.open(url)
                 }
-                .multilineTextAlignment(.trailing)
+            } label: {
+                Text(client.address)
             }
         }
     }

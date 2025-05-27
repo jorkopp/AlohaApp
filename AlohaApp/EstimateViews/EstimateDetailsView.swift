@@ -40,11 +40,15 @@ struct EstimateDetailsView: View {
                 }
                 lightsField("Lights")
                 couponField("Coupon")
-                plantPackageField("Plant Package")
-                rockRefreshField("Rock Refresh")
             }
             Section(header: Text("Demo")) {
                 demoField()
+            }
+            Section(header: Text("Plant Package")) {
+                plantPackageField()
+            }
+            Section(header: Text("Rock Refresh")) {
+                rockRefreshField()
             }
             Section(header: Text("Requests")) {
                 requestsField()
@@ -129,24 +133,20 @@ struct EstimateDetailsView: View {
     }
     
     @ViewBuilder
-    func plantPackageField(_ label: String) -> some View {
+    func plantPackageField() -> some View {
         if isEditing {
-            LabeledTextField(label: label, placeholder: "", value: $localEstimate.plantPackage)
+            TextEditor(text: $localEstimate.plantPackage)
         } else {
-            LabeledContent(label) {
-                Text(estimate.plantPackage)
-            }
+            Text(estimate.plantPackage)
         }
     }
     
     @ViewBuilder
-    func rockRefreshField(_ label: String) -> some View {
+    func rockRefreshField() -> some View {
         if isEditing {
-            LabeledTextField(label: label, placeholder: "", value: $localEstimate.rockRefresh)
+            TextEditor(text: $localEstimate.rockRefresh)
         } else {
-            LabeledContent(label) {
-                Text(estimate.rockRefresh)
-            }
+            Text(estimate.rockRefresh)
         }
     }
     
