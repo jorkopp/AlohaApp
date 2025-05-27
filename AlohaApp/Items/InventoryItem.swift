@@ -31,7 +31,7 @@ final public class InventoryItem: Item, Codable, Hashable {
     }
     
     public static func newItem() -> InventoryItem {
-        InventoryItem(uuid: UUID().uuidString, name: "", price: 0, count: "0")
+        InventoryItem(uuid: UUID().uuidString, name: "", price: 0, count: "")
     }
     
     public func isValid() -> Bool {

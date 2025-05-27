@@ -124,7 +124,7 @@ struct NewChecklistItemView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State private var selectedInventoryItem: InventoryItem?
-    @State private var quantity: String = "0"
+    @State private var quantity: String = ""
     @State private var isShowingMissingFieldsAlert = false
     
     var body: some View {
