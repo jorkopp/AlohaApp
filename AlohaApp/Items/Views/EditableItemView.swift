@@ -16,7 +16,7 @@ struct EditableItemView<T: Item, DetailsContent: View>: View {
     let item: T
     let detailsContent: (T) -> DetailsContent
     
-    @State private var showMissingFieldsAlert = false
+    @State private var isShowingMissingFieldsAlert = false
     
     var body: some View {
         detailsContent(item)
@@ -29,12 +29,12 @@ struct EditableItemView<T: Item, DetailsContent: View>: View {
                             itemListManager.save(item)
                         } else {
                             localEditMode = .active
-                            showMissingFieldsAlert = true
+                            isShowingMissingFieldsAlert = true
                         }
                     }
                 }
             }
-            .missingFieldsAlert(isPresented: $showMissingFieldsAlert)
+            .missingFieldsAlert(isPresented: $isShowingMissingFieldsAlert)
     }
 }
 

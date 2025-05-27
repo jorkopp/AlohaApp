@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+public extension View {
+    func missingFieldsAlert(isPresented: Binding<Bool>) -> some View {
+        self.alert("Missing Required Fields", isPresented: isPresented) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Please complete all required fields before proceeding.")
+        }
+    }
+}
+
 @MainActor
 public struct RequiredField<Content: View>: View {
     let isEditing: Bool

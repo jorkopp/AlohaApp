@@ -16,7 +16,7 @@ struct NewItemView<T: Item, DetailsContent: View>: View {
     let detailsContent: (T) -> DetailsContent
     
     private let item = T.newItem()
-    @State private var showMissingFieldsAlert = false
+    @State private var isShowingMissingFieldsAlert = false
     
     var body: some View {
         detailsContent(item)
@@ -28,7 +28,7 @@ struct NewItemView<T: Item, DetailsContent: View>: View {
                             itemListManager.save(item)
                             dismiss()
                         } else {
-                            showMissingFieldsAlert = true
+                            isShowingMissingFieldsAlert = true
                         }
                     }
                 }
@@ -39,17 +39,7 @@ struct NewItemView<T: Item, DetailsContent: View>: View {
                     }
                 }
             }
-            .missingFieldsAlert(isPresented: $showMissingFieldsAlert)
-    }
-}
-
-public extension View {
-    func missingFieldsAlert(isPresented: Binding<Bool>) -> some View {
-        self.alert("Missing Required Fields", isPresented: isPresented) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("Please complete all required fields before proceeding.")
-        }
+            .missingFieldsAlert(isPresented: $isShowingMissingFieldsAlert)
     }
 }
 

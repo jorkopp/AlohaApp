@@ -15,3 +15,7 @@ struct ClientRowView: View {
         Text(client.name)
     }
 }
+
+#Preview {
+    ContentView()
+}

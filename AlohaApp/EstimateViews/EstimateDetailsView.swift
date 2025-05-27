@@ -77,7 +77,7 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func lightsField(_ label: String) -> some View {
         if isEditing {
-            LabeledNumberField(label: label, placeholder: "e.g. 10", value: $localEstimate.lights)
+            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $localEstimate.lights)
         } else {
             LabeledContent(label) {
                 Text(estimate.lights)
@@ -99,7 +99,7 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func valvesField(_ label: String) -> some View {
         if isEditing {
-            LabeledNumberField(label: label, placeholder: "e.g. 10", value: $localEstimate.valves)
+            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $localEstimate.valves)
         } else {
             LabeledContent(label) {
                 Text(estimate.valves)

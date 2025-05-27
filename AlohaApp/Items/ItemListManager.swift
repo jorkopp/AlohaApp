@@ -8,8 +8,14 @@
 import Foundation
 import Firebase
 
+public protocol DependentItemListManager: AnyObject {
+    func dependentItemDeleted(_ item: any Item)
+}
+
 @Observable
 public class ItemListManager<T: Item> {
+    public private(set) var dependentItemListManagers = [any DependentItemListManager]()
+    
     public var itemsByUUID = [String: T]()
     
     public var items: [T] {
@@ -25,8 +31,13 @@ public class ItemListManager<T: Item> {
     private static var ref: DatabaseReference {
         Database.database().reference(withPath: T.refPath)
     }
+
+    public func registerDependentItemListManager(_ dependentItemListManager: any DependentItemListManager) {
+        dependentItemListManagers.append(dependentItemListManager)
+    }
     
     public func startFetchingItems() {
+        guard refHandle == nil else { return }
         refHandle = Self.ref.observe(DataEventType.value, with: { snapshot in
             let itemsData = (snapshot.valueAsDictionary as? [String: [String: Any]]) ?? [:]
             for (itemUUID, itemData) in itemsData {
@@ -74,10 +85,26 @@ public class ItemListManager<T: Item> {
             self.itemsByUUID.removeValue(forKey: item.uuid)
         }
         Self.ref.child(item.uuid).removeValue()
+        // TODO: If the app crashes right here we will have items that aren't cleaned up
+        for dependentItemListManager in dependentItemListManagers {
+            dependentItemListManager.dependentItemDeleted(item)
+        }
     }
     
     public func save(_ item: T) {
         self.itemsByUUID[item.uuid] = item
         Self.ref.child(item.uuid).updateChildValues(item.toDictionary())
+    }
+}
+
+public class ChecklistItemListManager: ItemListManager<Checklist>, DependentItemListManager {
+    public func dependentItemDeleted(_ item: any Item) {
+        guard let inventoryItem = item as? InventoryItem else { return }
+        
+        for checklist in itemsByUUID.values {
+            if checklist.quantityByItemUUID.removeValue(forKey: inventoryItem.uuid) != nil {
+                save(checklist)
+            }
+        }
     }
 }

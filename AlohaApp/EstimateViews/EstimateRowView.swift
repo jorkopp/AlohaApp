@@ -15,3 +15,7 @@ struct EstimateRowView: View {
         Text(estimate.uuid)
     }
 }
+
+#Preview {
+    ContentView()
+}

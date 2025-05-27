@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Firebase
 
 public enum FoundUs: String, CaseIterable, Identifiable, Codable {
     case Google
@@ -19,6 +18,8 @@ public enum FoundUs: String, CaseIterable, Identifiable, Codable {
 @Observable
 final public class Client: Item, Codable, Hashable {
     public static var refPath = "clients"
+    
+    public static var name = "client"
     
     public var uuid: String
     

@@ -11,16 +11,54 @@ public protocol Sortable {
     static func sort(lhs: Self, rhs: Self) -> Bool
 }
 
-public protocol Referenceable {
+public protocol Updateable {
+    @MainActor
+    func update(from other: Self)
+}
+
+public protocol Item: Codable, Hashable, Sortable, Updateable {
     static var refPath: String { get }
-}
-
-public protocol DictionaryRepresenting: Codable {
-    func toDictionary() -> [String: Any]
+    
+    static var name: String { get }
+    
+    static func newItem() -> Self
+    
+    var uuid: String { get }
+    
+    func isValid() -> Bool
+    
     static func fromDictionary(_ dict: [String: Any]) -> Self?
+    
+    func toDictionary() -> [String: Any]
 }
 
-public extension DictionaryRepresenting {
+public extension Item {
+    @MainActor
+    func updateIfDifferent<T: Equatable>(_ current: inout T, newValue: T) {
+        if current != newValue {
+            current = newValue
+        }
+    }
+}
+
+public extension Item {
+    static func _fromDictionary(_ dict: [String: Any]) -> Self? {
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let data = try JSONSerialization.data(withJSONObject: dict)
+            let instance = try decoder.decode(Self.self, from: data)
+            return instance
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+    
+    static func fromDictionary(_ dict: [String: Any]) -> Self? {
+        return _fromDictionary(dict)
+    }
+    
     func toDictionary() -> [String: Any] {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -30,37 +68,4 @@ public extension DictionaryRepresenting {
         }
         return dict
     }
-    
-    static func fromDictionary(_ dict: [String: Any]) -> Self? {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        guard let data = try? JSONSerialization.data(withJSONObject: dict),
-              let instance = try? decoder.decode(Self.self, from: data) else {
-            return nil
-        }
-        return instance
-    }
-}
-
-public protocol Updateable {
-    @MainActor
-    func update(from other: Self)
-}
-
-public extension Updateable {
-    @MainActor
-    func updateIfDifferent<T: Equatable>(_ current: inout T, newValue: T) {
-        if current != newValue {
-            current = newValue
-        }
-    }
-}
-
-public protocol UUIDConvertible {
-    var uuid: String { get }
-}
-
-public protocol Item: UUIDConvertible & Sortable & Referenceable & DictionaryRepresenting & Updateable & Hashable {
-    static func newItem() -> Self
-    func isValid() -> Bool
 }

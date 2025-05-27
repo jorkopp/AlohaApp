@@ -18,3 +18,6 @@ struct InventoryItemRowView: View {
     }
 }
 
+#Preview {
+    ContentView()
+}

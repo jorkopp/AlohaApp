@@ -6,23 +6,24 @@
 //
 
 import Foundation
-import Firebase
 
 @Observable
 final public class InventoryItem: Item, Codable, Hashable {
     public static var refPath = "inventoryItems"
     
+    public static var name = "item"
+    
     public var uuid: String
     
     public var name: String
     public var price: Float
-    public var count: Int
+    public var count: String
     
     enum CodingKeys: String, CodingKey {
         case uuid, name, price, count
     }
     
-    public init(uuid: String, name: String, price: Float, count: Int) {
+    public init(uuid: String, name: String, price: Float, count: String) {
         self.uuid = uuid
         self.name = name
         self.price = price
@@ -30,17 +31,16 @@ final public class InventoryItem: Item, Codable, Hashable {
     }
     
     public static func newItem() -> InventoryItem {
-        InventoryItem(uuid: UUID().uuidString, name: "", price: 0, count: 0)
+        InventoryItem(uuid: UUID().uuidString, name: "", price: 0, count: "0")
     }
     
     public func isValid() -> Bool {
-        !name.isEmpty
+        !name.isEmpty && !count.isEmpty
     }
     
     // MARK: Sortable
     
     public static func sort(lhs: InventoryItem, rhs: InventoryItem) -> Bool {
-        // TODO: Probably want to store a date and sort with that?
         return lhs.uuid < rhs.uuid
     }
     
@@ -61,7 +61,7 @@ final public class InventoryItem: Item, Codable, Hashable {
         self.uuid = try container.decode(String.self, forKey: .uuid)
         self.name = try container.decode(String.self, forKey: .name)
         self.price = try container.decode(Float.self, forKey: .price)
-        self.count = try container.decode(Int.self, forKey: .count)
+        self.count = try container.decode(String.self, forKey: .count)
     }
 
     public func encode(to encoder: Encoder) throws {

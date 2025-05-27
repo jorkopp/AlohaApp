@@ -26,9 +26,11 @@ struct InventoryItemDetailsView: View {
     var body: some View {
         Form {
             RequiredField(isEditing: isEditing) {
-                nameField()
+                nameField("Name")
             }
-            countField("Count")
+            RequiredField(isEditing: isEditing) {
+                countField("Count")
+            }
         }
         .onChange(of: isEditing) { oldValue, newValue in
             guard oldValue != newValue else { return }
@@ -44,16 +46,11 @@ struct InventoryItemDetailsView: View {
     }
     
     @ViewBuilder
-    func nameField() -> some View {
+    func nameField(_ label: String) -> some View {
         if isEditing {
-            LabeledContent("Name") {
-                TextField("Name", text: $localInventoryItem.name)
-                    .multilineTextAlignment(.trailing)
-                    .autocorrectionDisabled(true)
-                    .autocapitalization(UITextAutocapitalizationType.words)
-            }
+            LabeledTextField(label: label, placeholder: "e.g. Valve", value: $localInventoryItem.name)
         } else {
-            LabeledContent("Name") {
+            LabeledContent(label) {
                 Text(inventoryItem.name)
             }
         }
@@ -62,12 +59,15 @@ struct InventoryItemDetailsView: View {
     @ViewBuilder
     func countField(_ label: String) -> some View {
         if isEditing {
-//            LabeledNumberField(label: label, placeholder: "", value: <#T##Binding<String>#>)
-            Stepper("Count: \(localInventoryItem.count)", value: $localInventoryItem.count, in: 0...100)
+            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $localInventoryItem.count)
         } else {
-            LabeledContent("Count") {
-                Text(String(inventoryItem.count))
+            LabeledContent(label) {
+                Text(inventoryItem.count)
             }
         }
     }
+}
+
+#Preview {
+    ContentView()
 }

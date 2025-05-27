@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Firebase
 
 public enum PlantDensity: String, CaseIterable, Identifiable, Codable {
     case High
@@ -34,6 +33,8 @@ public enum Timer: String, CaseIterable, Identifiable, Codable {
 @Observable
 final public class Estimate: Item, Codable, Hashable {
     public static var refPath = "estimates"
+    
+    public static var name = "estimate"
     
     public var uuid: String
     
