@@ -17,5 +17,5 @@ struct ClientRowView: View {
 }
 
 #Preview {
-    ContentView()
+    ClientRowView(client: Client(name: "Sam"))
 }

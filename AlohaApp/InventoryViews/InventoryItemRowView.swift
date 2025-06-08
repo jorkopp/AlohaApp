@@ -19,5 +19,5 @@ struct InventoryItemRowView: View {
 }
 
 #Preview {
-    ContentView()
+    InventoryItemRowView(inventoryItem: InventoryItem(name: "Test Item", count: "10"))
 }

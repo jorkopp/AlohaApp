@@ -1,5 +1,5 @@
 //
-//  ContactInfoView.swift
+//  ClientContactInfoView.swift
 //  AlohaApp
 //
 //  Created by Jordan Kopp on 6/6/25.
@@ -8,21 +8,14 @@
 import SwiftUI
 
 @MainActor
-struct ContactInfoView: View {
+struct ClientContactInfoView: View {
     @Environment(\.editMode) private var editMode
     
     private var isEditing: Bool {
         editMode?.wrappedValue.isEditing ?? false
     }
     
-    @Bindable var client: Client
-    @State private var localClient: Client
-    
-    // TODO: What happens to localClient if they change tabs before presseing Done?
-    public init(client: Client) {
-        self.client = client
-        _localClient = State(initialValue: client)
-    }
+    @Binding var client: Client
     
     var body: some View {
         Form {
@@ -46,23 +39,12 @@ struct ContactInfoView: View {
                 notesField()
             }
         }
-        .onChange(of: isEditing) { oldValue, newValue in
-            guard oldValue != newValue else { return }
-            if !newValue && oldValue {
-                client.update(from: localClient)
-            }
-        }
-        .onChange(of: client) { _, newValue in
-            if !isEditing {
-                localClient = newValue
-            }
-        }
     }
     
     @ViewBuilder
     func nameField(_ label: String) -> some View {
         if isEditing {
-            LabeledTextField(label: label, placeholder: "John Doe", value: $localClient.name)
+            LabeledTextField(label: label, placeholder: "John Doe", value: $client.name)
         } else {
             LabeledContent(label) {
                 Text(client.name)
@@ -74,11 +56,11 @@ struct ContactInfoView: View {
     func phoneNumberField(_ label: String) -> some View {
         if isEditing {
             LabeledContent(label) {
-                TextField("(555) 555-5555", text: $localClient.phoneNumber)
+                TextField("(555) 555-5555", text: $client.phoneNumber)
                     .multilineTextAlignment(.trailing)
                     .keyboardType(.numberPad)
-                    .onChange(of: localClient.phoneNumber, { _, newValue in
-                        localClient.phoneNumber = formatPhoneNumber(newValue)
+                    .onChange(of: client.phoneNumber, { _, newValue in
+                        client.phoneNumber = formatPhoneNumber(newValue)
                     })
             }
         } else {
@@ -100,7 +82,7 @@ struct ContactInfoView: View {
     func emailField(_ label: String) -> some View {
         if isEditing {
             LabeledContent(label) {
-                TextField("johndoe@gmail.com", text: $localClient.email)
+                TextField("johndoe@gmail.com", text: $client.email)
                     .multilineTextAlignment(.trailing)
                     .autocorrectionDisabled(true)
                     .keyboardType(.emailAddress)
@@ -123,7 +105,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func addressField() -> some View {
         if isEditing {
-            TextEditor(text: $localClient.address)
+            TextEditor(text: $client.address)
         } else {
             Button {
                 let encodedAddress = client.address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -140,7 +122,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func houseYearField(_ label: String) -> some View {
         if isEditing {
-            YearPicker(title: label, selectedYear: $localClient.houseYearBuilt)
+            YearPicker(title: label, selectedYear: $client.houseYearBuilt)
         } else {
             LabeledContent(label) {
                 Text(client.houseYearBuilt.map(String.init) ?? "")
@@ -151,7 +133,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func gateCodeField(_ label: String) -> some View {
         if isEditing {
-            LabeledTextField(label: label, placeholder: "e.g. 1234", value: $localClient.gateCode)
+            LabeledTextField(label: label, placeholder: "e.g. 1234", value: $client.gateCode)
         } else {
             LabeledContent(label) {
                 Text(client.gateCode)
@@ -162,7 +144,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func lotSizeField(_ label: String) -> some View {
         if isEditing {
-            LabeledNumberField(label: label, placeholder: "e.g. 5000", value: $localClient.lotSqft)
+            LabeledNumberField(label: label, placeholder: "e.g. 5000", value: $client.lotSqft)
         } else {
             LabeledContent(label) {
                 Text(client.lotSqft)
@@ -174,7 +156,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func purchaseYearField(_ label: String) -> some View {
         if isEditing {
-            YearPicker(title: label, selectedYear: $localClient.purchaseYear)
+            YearPicker(title: label, selectedYear: $client.purchaseYear)
         } else {
             LabeledContent(label) {
                 Text(client.purchaseYear.map(String.init) ?? "")
@@ -185,7 +167,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func foundUsField(_ label: String) -> some View {
         if isEditing {
-            OptionPicker(label: label, selection: $localClient.foundUs)
+            OptionPicker(label: label, selection: $client.foundUs)
         } else {
             LabeledContent(label) {
                 Text(client.foundUs?.rawValue ?? "")
@@ -196,7 +178,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func phoneEstimateField(_ label: String) -> some View {
         if isEditing {
-            LabeledNumberField(label: label, placeholder: "$$$", value: $localClient.phoneEstimate)
+            LabeledNumberField(label: label, placeholder: "$$$", value: $client.phoneEstimate)
         } else {
             LabeledContent(label) {
                 Text(client.phoneEstimate)
@@ -207,7 +189,7 @@ struct ContactInfoView: View {
     @ViewBuilder
     func notesField() -> some View {
         if isEditing {
-            TextEditor(text: $localClient.notes)
+            TextEditor(text: $client.notes)
         } else {
             Text(client.notes)
         }

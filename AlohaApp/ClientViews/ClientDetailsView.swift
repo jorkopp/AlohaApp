@@ -15,14 +15,8 @@ struct ClientDetailsView: View {
         editMode?.wrappedValue.isEditing ?? false
     }
     
-    @Bindable var client: Client
-    @State private var localClient: Client
+    @Binding var client: Client
     @State private var selectedTab = 0
-    
-    public init(client: Client) {
-        self.client = client
-        _localClient = State(initialValue: client)
-    }
     
     var body: some View {
         NavigationStack {
@@ -35,8 +29,10 @@ struct ClientDetailsView: View {
             .padding()
             switch selectedTab {
             case 0:
-                ContactInfoView(client: client)
-            case 1, 2:
+                ClientContactInfoView(client: $client)
+            case 1:
+                ClientSiteAssessmentView(siteAssessment: $client.siteAssessment)
+            case 2:
                 VStack {
                     Text("TODO")
                     Spacer()

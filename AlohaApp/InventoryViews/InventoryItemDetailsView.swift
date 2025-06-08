@@ -15,36 +15,19 @@ struct InventoryItemDetailsView: View {
         editMode?.wrappedValue.isEditing ?? false
     }
     
-    @Bindable var inventoryItem: InventoryItem
-    @State private var localInventoryItem: InventoryItem
-    
-    public init(inventoryItem: InventoryItem) {
-        self.inventoryItem = inventoryItem
-        _localInventoryItem = State(initialValue: inventoryItem)
-    }
+    @Binding var inventoryItem: InventoryItem
     
     var body: some View {
         Form {
             nameField("Name")
             countField("Count")
         }
-        .onChange(of: isEditing) { oldValue, newValue in
-            guard oldValue != newValue else { return }
-            if !newValue && oldValue {
-                inventoryItem.update(from: localInventoryItem)
-            }
-        }
-        .onChange(of: inventoryItem) { _, newValue in
-            if !isEditing {
-                localInventoryItem = inventoryItem
-            }
-        }
     }
     
     @ViewBuilder
     func nameField(_ label: String) -> some View {
         if isEditing {
-            LabeledTextField(label: label, placeholder: "e.g. Valve", value: $localInventoryItem.name)
+            LabeledTextField(label: label, placeholder: "e.g. Valve", value: $inventoryItem.name)
         } else {
             LabeledContent(label) {
                 Text(inventoryItem.name)
@@ -55,7 +38,7 @@ struct InventoryItemDetailsView: View {
     @ViewBuilder
     func countField(_ label: String) -> some View {
         if isEditing {
-            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $localInventoryItem.count)
+            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $inventoryItem.count)
         } else {
             LabeledContent(label) {
                 Text(inventoryItem.count)

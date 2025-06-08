@@ -1,5 +1,5 @@
 //
-//  EstimateDetailsView.swift
+//  ClientSiteAssessmentView.swift
 //  AlohaApp
 //
 //  Created by Jordan Kopp on 1/19/25.
@@ -8,20 +8,14 @@
 import SwiftUI
 
 @MainActor
-struct EstimateDetailsView: View {
+struct ClientSiteAssessmentView: View {
     @Environment(\.editMode) private var editMode
     
     private var isEditing: Bool {
         editMode?.wrappedValue.isEditing ?? false
     }
     
-    @Bindable var estimate: Estimate
-    @State private var localEstimate: Estimate
-    
-    public init(estimate: Estimate) {
-        self.estimate = estimate
-        _localEstimate = State(initialValue: estimate)
-    }
+    @Binding var siteAssessment: SiteAssessment
     
     var body: some View {
         Form {
@@ -46,26 +40,15 @@ struct EstimateDetailsView: View {
                 requestsField()
             }
         }
-        .onChange(of: isEditing) { oldValue, newValue in
-            guard oldValue != newValue else { return }
-            if !newValue && oldValue {
-                estimate.update(from: localEstimate)
-            }
-        }
-        .onChange(of: estimate) { _, newValue in
-            if !isEditing {
-                localEstimate = newValue
-            }
-        }
     }
     
     @ViewBuilder
     func plantDensityField(_ label: String) -> some View {
         if isEditing {
-            OptionPicker(label: label, selection: $localEstimate.plantDensity)
+            OptionPicker(label: label, selection: $siteAssessment.plantDensity)
         } else {
             LabeledContent(label) {
-                Text(estimate.plantDensity?.rawValue ?? "")
+                Text(siteAssessment.plantDensity?.rawValue ?? "")
             }
         }
     }
@@ -73,10 +56,10 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func lightsField(_ label: String) -> some View {
         if isEditing {
-            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $localEstimate.lights)
+            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $siteAssessment.lights)
         } else {
             LabeledContent(label) {
-                Text(estimate.lights)
+                Text(siteAssessment.lights)
             }
         }
     }
@@ -84,10 +67,10 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func accessDifficultyField(_ label: String) -> some View {
         if isEditing {
-            OptionPicker(label: label, selection: $localEstimate.access)
+            OptionPicker(label: label, selection: $siteAssessment.access)
         } else {
             LabeledContent(label) {
-                Text(estimate.access?.rawValue ?? "")
+                Text(siteAssessment.access?.rawValue ?? "")
             }
         }
     }
@@ -95,10 +78,10 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func valvesField(_ label: String) -> some View {
         if isEditing {
-            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $localEstimate.valves)
+            LabeledNumberField(label: label, placeholder: "e.g. 5", value: $siteAssessment.valves)
         } else {
             LabeledContent(label) {
-                Text(estimate.valves)
+                Text(siteAssessment.valves)
             }
         }
     }
@@ -106,10 +89,10 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func timerField(_ label: String) -> some View {
         if isEditing {
-            OptionPicker(label: label, selection: $localEstimate.timer)
+            OptionPicker(label: label, selection: $siteAssessment.timer)
         } else {
             LabeledContent(label) {
-                Text(estimate.timer?.rawValue ?? "")
+                Text(siteAssessment.timer?.rawValue ?? "")
             }
         }
     }
@@ -117,9 +100,9 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func couponField(_ label: String) -> some View {
         if isEditing {
-            Toggle(label, isOn: $localEstimate.coupon)
+            Toggle(label, isOn: $siteAssessment.coupon)
         } else {
-            Toggle(label, isOn: $estimate.coupon)
+            Toggle(label, isOn: $siteAssessment.coupon)
                 .disabled(true)
         }
     }
@@ -127,36 +110,36 @@ struct EstimateDetailsView: View {
     @ViewBuilder
     func plantPackageField() -> some View {
         if isEditing {
-            TextEditor(text: $localEstimate.plantPackage)
+            TextEditor(text: $siteAssessment.plantPackage)
         } else {
-            Text(estimate.plantPackage)
+            Text(siteAssessment.plantPackage)
         }
     }
     
     @ViewBuilder
     func rockRefreshField() -> some View {
         if isEditing {
-            TextEditor(text: $localEstimate.rockRefresh)
+            TextEditor(text: $siteAssessment.rockRefresh)
         } else {
-            Text(estimate.rockRefresh)
+            Text(siteAssessment.rockRefresh)
         }
     }
     
     @ViewBuilder
     func demoField() -> some View {
         if isEditing {
-            TextEditor(text: $localEstimate.demo)
+            TextEditor(text: $siteAssessment.demo)
         } else {
-            Text(estimate.demo)
+            Text(siteAssessment.demo)
         }
     }
     
     @ViewBuilder
     func requestsField() -> some View {
         if isEditing {
-            TextEditor(text: $localEstimate.requests)
+            TextEditor(text: $siteAssessment.requests)
         } else {
-            Text(estimate.requests)
+            Text(siteAssessment.requests)
         }
     }
 }

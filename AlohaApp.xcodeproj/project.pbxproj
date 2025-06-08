@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B5820C22DF61B8300C3DB4F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0B5820C12DF61B8300C3DB4F /* FirebaseFirestore */; };
 		0BE58D662D3DE8870052EFD5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D652D3DE8870052EFD5 /* FirebaseAnalytics */; };
 		0BE58D682D3DE8870052EFD5 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D672D3DE8870052EFD5 /* FirebaseAppCheck */; };
 		0BE58D6A2D3DE8870052EFD5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D692D3DE8870052EFD5 /* FirebaseAuth */; };
@@ -65,6 +66,7 @@
 				0BE58D6A2D3DE8870052EFD5 /* FirebaseAuth in Frameworks */,
 				0BE58D6C2D3DE8870052EFD5 /* FirebaseCore in Frameworks */,
 				0BE58D662D3DE8870052EFD5 /* FirebaseAnalytics in Frameworks */,
+				0B5820C22DF61B8300C3DB4F /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,12 +87,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B5820C02DF61B8300C3DB4F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0BE58D272D3DE34E0052EFD5 = {
 			isa = PBXGroup;
 			children = (
 				0BE58D322D3DE34E0052EFD5 /* AlohaApp */,
 				0BE58D442D3DE34F0052EFD5 /* AlohaAppTests */,
 				0BE58D4E2D3DE34F0052EFD5 /* AlohaAppUITests */,
+				0B5820C02DF61B8300C3DB4F /* Frameworks */,
 				0BE58D312D3DE34E0052EFD5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,6 +140,7 @@
 				0BE58D692D3DE8870052EFD5 /* FirebaseAuth */,
 				0BE58D6B2D3DE8870052EFD5 /* FirebaseCore */,
 				0BE58D6D2D3DE8870052EFD5 /* FirebaseDatabase */,
+				0B5820C12DF61B8300C3DB4F /* FirebaseFirestore */,
 			);
 			productName = AlohaApp;
 			productReference = 0BE58D302D3DE34E0052EFD5 /* AlohaApp.app */;
@@ -627,6 +638,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0B5820C12DF61B8300C3DB4F /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		0BE58D652D3DE8870052EFD5 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0BE58D642D3DE8870052EFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -15,7 +15,7 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
     let itemListManager: ItemListManager<T>
     
     let rowContent: (T) -> RowContent
-    let detailsContent: (T) -> DetailsContent
+    let detailsContent: (Binding<T>) -> DetailsContent
     
     @State private var isAddingNewItem = false
     @State private var isShowingDeleteAlert: Bool = false
@@ -38,6 +38,9 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
                     indexSetToDelete = indexSet
                 }
             }
+        }
+        .onAppear {
+            itemListManager.startFetchingItems()
         }
         .navigationTitle(title)
         .toolbar {
@@ -62,7 +65,7 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
                 }
             }
         }
-        .alert("Are you sure you want to delete this \(T.name)?", isPresented: $isShowingDeleteAlert) {
+        .alert("Are you sure you want to delete this \(String(describing: T.self))?", isPresented: $isShowingDeleteAlert) {
             Button("Delete", role: .destructive) {
                 if let indexSet = indexSetToDelete {
                     for index in indexSet {

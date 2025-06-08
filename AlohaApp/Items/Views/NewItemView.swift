@@ -11,19 +11,18 @@ import SwiftUI
 struct NewItemView<T: Item, DetailsContent: View>: View {
     @Environment(\.editMode) private var editMode
     @Environment(\.dismiss) private var dismiss
+    @State private var newItem = T.newItem()
     
     let itemListManager: ItemListManager<T>
-    let detailsContent: (T) -> DetailsContent
-    
-    private let item = T.newItem()
+    let detailsContent: (Binding<T>) -> DetailsContent
     
     var body: some View {
-        detailsContent(item)
+        detailsContent($newItem)
             .environment(\.editMode, Binding.constant(EditMode.active))
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        itemListManager.save(item)
+                        itemListManager.save(newItem)
                         dismiss()
                     }
                 }
