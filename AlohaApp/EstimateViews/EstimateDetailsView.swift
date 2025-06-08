@@ -26,18 +26,10 @@ struct EstimateDetailsView: View {
     var body: some View {
         Form {
             Section(header: Text("Site Details")) {
-                RequiredField(isEditing: isEditing) {
-                    plantDensityField("Plant Density")
-                }
-                RequiredField(isEditing: isEditing) {
-                    accessDifficultyField("Access Difficulty")
-                }
-                RequiredField(isEditing: isEditing) {
-                    timerField("Timer Type")
-                }
-                RequiredField(isEditing: isEditing) {
-                    valvesField("Valves")
-                }
+                plantDensityField("Plant Density")
+                accessDifficultyField("Access Difficulty")
+                timerField("Timer Type")
+                valvesField("Valves")
                 lightsField("Lights")
                 couponField("Coupon")
             }

@@ -28,7 +28,6 @@ struct ChecklistDetailsView: View {
     let checklistItemListManager: ItemListManager<Checklist>
     let inventoryItemListManager: ItemListManager<InventoryItem>
     
-    @State private var isShowingMissingFieldsAlert = false
     @State private var isEditingChecklistName = false
     @State private var isShowingNewChecklistItem = false
     @State private var isShowingDeleteAlert: Bool = false
@@ -46,7 +45,9 @@ struct ChecklistDetailsView: View {
                 .onDelete { indexSet in
                     for index in indexSet {
                         let itemUUIDToDelete = sortedItemUUIDs[index]
-                        checklist.quantityByItemUUID.removeValue(forKey: itemUUIDToDelete)
+                        var newQuantityByItemUUID = checklist.quantityByItemUUID
+                        newQuantityByItemUUID.removeValue(forKey: itemUUIDToDelete)
+                        checklist.quantityByItemUUID = newQuantityByItemUUID
                         checklistItemListManager.save(checklist)
                     }
                 }
@@ -129,25 +130,21 @@ struct NewChecklistItemView: View {
     
     var body: some View {
         Form {
-            RequiredField(isEditing: true) {
-                Picker("Item", selection: $selectedInventoryItem) {
-                    Text("Select item").tag(Optional<InventoryItem>(nil))
-                    ForEach(inventoryItemListManager.items, id: \.self) { item in
-                        Text(item.name).tag(item)
-                    }
+            Picker("Item", selection: $selectedInventoryItem) {
+                Text("Select item").tag(Optional<InventoryItem>(nil))
+                ForEach(inventoryItemListManager.items, id: \.self) { item in
+                    Text(item.name).tag(item)
                 }
             }
-            RequiredField(isEditing: true) {
-                LabeledNumberField(label: "Quantity", placeholder: "e.g. 5", value: $quantity)
-            }
+            LabeledNumberField(label: "Quantity", placeholder: "e.g. 5", value: $quantity)
         }
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Done") {
-                    if selectedInventoryItem == nil || quantity.isEmpty {
-                        isShowingMissingFieldsAlert = true
-                    } else {
-                        checklist.quantityByItemUUID[selectedInventoryItem!.uuid] = quantity
+                    if let currentSelectedInventoryItem = selectedInventoryItem {
+                        var newQuantityByItemUUID = checklist.quantityByItemUUID
+                        newQuantityByItemUUID[currentSelectedInventoryItem.uuid] = quantity
+                        checklist.quantityByItemUUID = newQuantityByItemUUID
                         checklistItemListManager.save(checklist)
                         selectedInventoryItem = nil
                         quantity = ""
@@ -163,7 +160,6 @@ struct NewChecklistItemView: View {
                 }
             }
         }
-        .missingFieldsAlert(isPresented: $isShowingMissingFieldsAlert)
     }
 }
 

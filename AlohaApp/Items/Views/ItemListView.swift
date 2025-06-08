@@ -54,9 +54,7 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
                 }
             }
         }
-        .onAppear {
-            itemListManager.startFetchingItems()
-        }
+
         .sheet(isPresented: $isAddingNewItem) {
             NavigationStack {
                 NewItemView(itemListManager: itemListManager) { item in

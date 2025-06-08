@@ -16,8 +16,6 @@ struct EditableItemView<T: Item, DetailsContent: View>: View {
     let item: T
     let detailsContent: (T) -> DetailsContent
     
-    @State private var isShowingMissingFieldsAlert = false
-    
     var body: some View {
         detailsContent(item)
             .navigationBarItems(trailing: EditButton())
@@ -29,12 +27,10 @@ struct EditableItemView<T: Item, DetailsContent: View>: View {
                             itemListManager.save(item)
                         } else {
                             localEditMode = .active
-                            isShowingMissingFieldsAlert = true
                         }
                     }
                 }
             }
-            .missingFieldsAlert(isPresented: $isShowingMissingFieldsAlert)
     }
 }
 

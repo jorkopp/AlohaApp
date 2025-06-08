@@ -25,12 +25,8 @@ struct InventoryItemDetailsView: View {
     
     var body: some View {
         Form {
-            RequiredField(isEditing: isEditing) {
-                nameField("Name")
-            }
-            RequiredField(isEditing: isEditing) {
-                countField("Count")
-            }
+            nameField("Name")
+            countField("Count")
         }
         .onChange(of: isEditing) { oldValue, newValue in
             guard oldValue != newValue else { return }

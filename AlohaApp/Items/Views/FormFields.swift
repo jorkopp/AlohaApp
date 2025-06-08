@@ -7,34 +7,6 @@
 
 import SwiftUI
 
-public extension View {
-    func missingFieldsAlert(isPresented: Binding<Bool>) -> some View {
-        self.alert("Missing Required Fields", isPresented: isPresented) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("Please complete all required fields before proceeding.")
-        }
-    }
-}
-
-@MainActor
-public struct RequiredField<Content: View>: View {
-    let isEditing: Bool
-    let content: () -> Content
-
-    public var body: some View {
-        ZStack(alignment: .topTrailing) {
-            content()
-            if isEditing {
-                Text("*")
-                    .foregroundColor(.red)
-                    .font(.caption)
-                    .offset(x: 12, y: -1)
-            }
-        }
-    }
-}
-
 @MainActor
 public struct YearPicker: View {
     let title: String

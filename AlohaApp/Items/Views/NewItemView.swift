@@ -16,7 +16,6 @@ struct NewItemView<T: Item, DetailsContent: View>: View {
     let detailsContent: (T) -> DetailsContent
     
     private let item = T.newItem()
-    @State private var isShowingMissingFieldsAlert = false
     
     var body: some View {
         detailsContent(item)
@@ -24,12 +23,8 @@ struct NewItemView<T: Item, DetailsContent: View>: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        if item.isValid() {
-                            itemListManager.save(item)
-                            dismiss()
-                        } else {
-                            isShowingMissingFieldsAlert = true
-                        }
+                        itemListManager.save(item)
+                        dismiss()
                     }
                 }
                 
@@ -39,7 +34,6 @@ struct NewItemView<T: Item, DetailsContent: View>: View {
                     }
                 }
             }
-            .missingFieldsAlert(isPresented: $isShowingMissingFieldsAlert)
     }
 }
 

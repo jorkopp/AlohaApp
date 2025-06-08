@@ -34,8 +34,17 @@ final public class InventoryItem: Item, Codable, Hashable {
         InventoryItem(uuid: UUID().uuidString, name: "", price: 0, count: "")
     }
     
+    // TODO: Some alert like this when not valid
+    /*
+     self.alert("Missing Information", isPresented: isPresented) {
+         Button("OK", role: .cancel) { }
+     } message: {
+         Text("Inventory item must have a name to save.")
+     }
+     */
+    // TODO: Should also have a make valid call to convert count="" to count="0" because we don't want to initialize it to 0 since for new items we don't want the user to have to backspace but if they save without it should default then
     public func isValid() -> Bool {
-        !name.isEmpty && !count.isEmpty
+        !name.isEmpty
     }
     
     // MARK: Sortable
