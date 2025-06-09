@@ -10,15 +10,19 @@ import Foundation
 extension Client {
     struct SiteAssessment: Codable, Equatable, Hashable {
         var plantDensity: PlantDensity?
+        var plants: String = ""
         var lights: String = ""
         var access: AccessDifficulty?
         var valves: String = ""
+        var backflowValve: Bool = false
         var timer: Timer?
         var demo: String = ""
         var coupon: Bool = false
+        var hasGrass: Bool = false
         var plantPackage: String = ""
         var rockRefresh: String = ""
         var requests: String = ""
+        var notes: String = ""
     }
 }
 

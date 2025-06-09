@@ -19,39 +19,44 @@ extension Client {
         @State private var isAddingNewItem = false
         
         var body: some View {
-            NavigationStack {
+            Group {
                 if !editMode.isEditing && checklist.items.count == 0 {
-                    Text("No items added yet.\nTap the Edit button to get started.")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                }
-                List {
-                    ForEach(checklist.items.enumerated().sorted(by: { $0.element.name < $1.element.name }), id: \.offset) { pair in
-                        HStack {
-                            if editMode.isEditing {
-                                Button(role: .destructive) {
-                                    checklist.items.remove(at: pair.offset)
-                                } label: {
-                                    Image(systemName: "minus.circle.fill")
-                                }
-                            }
-                            ChecklistRowView(item: $checklist.items[pair.offset])
-                        }
+                    VStack {
+                        Text("No items added yet.\nTap the Edit button to get started.")
+                            .font(.callout)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        Spacer()
                     }
-                    if editMode.isEditing {
-                        Button {
-                            isAddingNewItem = true
-                        } label: {
-                            Label("Add Item", systemImage: "plus")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color(.systemGroupedBackground))
+                } else {
+                    List {
+                        ForEach(checklist.items.enumerated().sorted(by: { $0.element.name < $1.element.name }), id: \.offset) { pair in
+                            HStack {
+                                if editMode.isEditing {
+                                    Button(role: .destructive) {
+                                        checklist.items.remove(at: pair.offset)
+                                    } label: {
+                                        Image(systemName: "minus.circle.fill")
+                                    }
+                                }
+                                ChecklistRowView(item: $checklist.items[pair.offset])
+                            }
+                        }
+                        if editMode.isEditing {
+                            Button {
+                                isAddingNewItem = true
+                            } label: {
+                                Label("Add Item", systemImage: "plus")
+                            }
                         }
                     }
                 }
             }
             .sheet(isPresented: $isAddingNewItem) {
-                NavigationStack {
-                    NewChecklistItemView(checklist: $checklist, inventoryItemNames: inventoryItemNames)
-                }
+                NewChecklistItemView(checklist: $checklist, inventoryItemNames: inventoryItemNames)
             }
         }
     }
@@ -94,7 +99,6 @@ extension Client {
         
         var body: some View {
             Form {
-                // TODO: Custom item and pop up for free form?
                 Picker("Item", selection: Binding(
                     get: { selectedItemName },
                     set: { newValue in

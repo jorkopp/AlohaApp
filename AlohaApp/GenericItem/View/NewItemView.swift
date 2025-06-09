@@ -18,22 +18,11 @@ struct NewItemView<T: Item, DetailsContent: View>: View {
     let detailsContent: (Binding<T>) -> DetailsContent
     
     var body: some View {
-        detailsContent($newItem)
-            .environment(\.editMode, Binding.constant(EditMode.active))
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        itemListManager.save(newItem)
-                        dismiss()
-                    }
-                }
-                
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
+        Group {
+            EditableItemView(itemListManager: itemListManager, item: newItem, initialEditMode: .active) { item in
+                detailsContent(item)
             }
+        }
     }
 }
 

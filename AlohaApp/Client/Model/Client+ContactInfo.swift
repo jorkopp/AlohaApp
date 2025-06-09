@@ -9,6 +9,7 @@ import Foundation
 
 extension Client {
     struct ContactInfo: Codable, Equatable, Hashable {
+        var active: Bool = true
         var name: String = ""
         var phoneNumber: String = ""
         var email: String = ""
@@ -19,6 +20,7 @@ extension Client {
         var gateCode: String = ""
         var foundUs: FoundUs?
         var phoneEstimate: String = ""
+        var signOnSite: Bool = false
         var notes: String = ""
     }
 }

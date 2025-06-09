@@ -18,9 +18,9 @@ extension Client {
         
         var title: String {
             switch self {
-            case .contactInfo: return "Contact Info"
-            case .siteAssessment: return "Site Assessment"
-            case .jobChecklist: return "Job Checklist"
+            case .contactInfo: return "CONTACT INFO"
+            case .siteAssessment: return "SITE ASSESSMENT"
+            case .jobChecklist: return "JOB CHECKLIST"
             }
         }
     }
@@ -35,14 +35,9 @@ extension Client {
         @State private var selectedTab: DetailsTab = .contactInfo
         
         var body: some View {
-            NavigationStack {
-                Picker("Client Details Section", selection: $selectedTab) {
-                    ForEach(DetailsTab.allCases) { tab in
-                        Text(tab.title).tag(tab)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding()
+            Group {
+                DetailsTabView(selectedTab: $selectedTab)
+                    .padding()
                 
                 switch selectedTab {
                 case .contactInfo:
@@ -55,6 +50,54 @@ extension Client {
             }
             .navigationTitle(clientModel.contactInfo.name)
             .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    struct DetailsTabView: View {
+        @Binding var selectedTab: DetailsTab
+        @Namespace var name
+
+        var body: some View {
+            HStack(spacing: 0) {
+                ForEach(DetailsTab.allCases, id: \.self) { tab in
+                    tabButton(for: tab)
+                }
+            }
+        }
+        
+        @ViewBuilder
+        func tabButton(for tab: DetailsTab) -> some View {
+            Button {
+                selectedTab = tab
+            } label: {
+                VStack {
+                    title(for: tab)
+                    selectionIndicator(for: tab)
+                }
+            }
+        }
+
+        @ViewBuilder
+        func title(for tab: DetailsTab) -> some View {
+            Text(tab.title)
+                .font(.footnote)
+                .fontWeight(.medium)
+                .foregroundColor(tab == selectedTab ? .primary : .secondary)
+        }
+        
+        @ViewBuilder
+        func selectionIndicator(for tab: DetailsTab) -> some View {
+            ZStack {
+                Capsule()
+                    .fill(Color.clear)
+                    .frame(height: 4)
+                if tab == selectedTab {
+                    Capsule()
+                        .fill(Color.primary)
+                        .frame(height: 4)
+                        .matchedGeometryEffect(id: "Tab", in: name)
+                }
+            }
         }
     }
 }

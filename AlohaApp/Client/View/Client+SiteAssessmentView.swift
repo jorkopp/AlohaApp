@@ -19,9 +19,12 @@ extension Client {
             Form {
                 Section(header: Text("Site Details")) {
                     plantDensityField("Plant Density")
+                    plantsField("Plants")
                     accessDifficultyField("Access Difficulty")
+                    hasGrassField("Grass")
                     timerField("Timer Type")
                     valvesField("Valves")
+                    backflowValveField("Backflow Valve")
                     lightsField("Lights")
                     couponField("Coupon")
                 }
@@ -37,6 +40,9 @@ extension Client {
                 Section(header: Text("Requests")) {
                     requestsField()
                 }
+                Section(header: Text("Notes")) {
+                    notesField()
+                }
             }
         }
         
@@ -47,6 +53,17 @@ extension Client {
             } else {
                 LabeledContent(label) {
                     Text(siteAssessment.plantDensity?.rawValue ?? "")
+                }
+            }
+        }
+        
+        @ViewBuilder
+        func plantsField(_ label: String) -> some View {
+            if editMode.isEditing {
+                LabeledNumberField(label: label, placeholder: label, value: $siteAssessment.plants)
+            } else {
+                LabeledContent(label) {
+                    Text(siteAssessment.plants)
                 }
             }
         }
@@ -74,6 +91,16 @@ extension Client {
         }
         
         @ViewBuilder
+        func hasGrassField(_ label: String) -> some View {
+            if editMode.isEditing {
+                Toggle(label, isOn: $siteAssessment.hasGrass)
+            } else {
+                Toggle(label, isOn: $siteAssessment.hasGrass)
+                    .disabled(true)
+            }
+        }
+        
+        @ViewBuilder
         func valvesField(_ label: String) -> some View {
             if editMode.isEditing {
                 LabeledNumberField(label: label, placeholder: label, value: $siteAssessment.valves)
@@ -81,6 +108,16 @@ extension Client {
                 LabeledContent(label) {
                     Text(siteAssessment.valves)
                 }
+            }
+        }
+        
+        @ViewBuilder
+        func backflowValveField(_ label: String) -> some View {
+            if editMode.isEditing {
+                Toggle(label, isOn: $siteAssessment.backflowValve)
+            } else {
+                Toggle(label, isOn: $siteAssessment.backflowValve)
+                    .disabled(true)
             }
         }
         
@@ -138,6 +175,15 @@ extension Client {
                 TextEditor(text: $siteAssessment.requests)
             } else {
                 Text(siteAssessment.requests)
+            }
+        }
+        
+        @ViewBuilder
+        func notesField() -> some View {
+            if editMode.isEditing {
+                TextEditor(text: $siteAssessment.notes)
+            } else {
+                Text(siteAssessment.notes)
             }
         }
     }

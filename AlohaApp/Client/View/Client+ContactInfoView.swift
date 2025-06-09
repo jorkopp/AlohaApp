@@ -22,6 +22,7 @@ extension Client {
                     phoneNumberField("Phone")
                     emailField("Email")
                     foundUsField("Found Us")
+                    activeField("Active")
                 }
                 Section(header: Text("Property Address")) {
                     addressField()
@@ -31,6 +32,7 @@ extension Client {
                     purchaseYearField("Purchase Year")
                     lotSizeField("Lot Size (sq ft)")
                     gateCodeField("Gate Code")
+                    signOnSiteField("Sign on Site")
                     phoneEstimateField("Phone Estimate ($)")
                 }
                 Section(header: Text("Notes")) {
@@ -101,6 +103,16 @@ extension Client {
         }
         
         @ViewBuilder
+        func activeField(_ label: String) -> some View {
+            if editMode.isEditing {
+                Toggle(label, isOn: $contactInfo.active)
+            } else {
+                Toggle(label, isOn: $contactInfo.active)
+                    .disabled(true)
+            }
+        }
+        
+        @ViewBuilder
         func addressField() -> some View {
             if editMode.isEditing {
                 TextEditor(text: $contactInfo.address)
@@ -140,6 +152,16 @@ extension Client {
         }
         
         @ViewBuilder
+        func signOnSiteField(_ label: String) -> some View {
+            if editMode.isEditing {
+                Toggle(label, isOn: $contactInfo.signOnSite)
+            } else {
+                Toggle(label, isOn: $contactInfo.signOnSite)
+                    .disabled(true)
+            }
+        }
+        
+        @ViewBuilder
         func lotSizeField(_ label: String) -> some View {
             if editMode.isEditing {
                 LabeledNumberField(label: label, placeholder: label, value: $contactInfo.lotSqft)
@@ -148,7 +170,6 @@ extension Client {
                     Text(contactInfo.lotSqft)
                 }
             }
-            
         }
         
         @ViewBuilder

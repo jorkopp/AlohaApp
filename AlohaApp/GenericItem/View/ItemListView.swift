@@ -53,14 +53,16 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
                 }
             }
         }
-
-        .sheet(isPresented: $isAddingNewItem) {
-            NavigationStack {
-                NewItemView(itemListManager: itemListManager) { item in
-                    detailsContent(item)
-                }
+        .navigationDestination(isPresented: $isAddingNewItem) {
+            NewItemView(itemListManager: itemListManager) { item in
+                detailsContent(item)
             }
         }
+//        .sheet(isPresented: $isAddingNewItem) {
+//            NewItemView(itemListManager: itemListManager) { item in
+//                detailsContent(item)
+//            }
+//        }
         .alert("Are you sure you want to delete this \(T.name)?", isPresented: $isShowingDeleteAlert) {
             Button("Delete", role: .destructive) {
                 if let indexSet = indexSetToDelete {

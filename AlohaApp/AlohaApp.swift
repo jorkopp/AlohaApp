@@ -22,7 +22,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct AlohaApp: App {
-
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
