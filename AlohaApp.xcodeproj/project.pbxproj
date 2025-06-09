@@ -8,6 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		0B5820C22DF61B8300C3DB4F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0B5820C12DF61B8300C3DB4F /* FirebaseFirestore */; };
+		0B5820E62DF651C700C3DB4F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5820DE2DF651C700C3DB4F /* Preview Assets.xcassets */; };
+		0B5820E72DF651C700C3DB4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B5820E22DF651C700C3DB4F /* Assets.xcassets */; };
+		0B5820E82DF651C700C3DB4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B5820E42DF651C700C3DB4F /* GoogleService-Info.plist */; };
+		0B5820E92DF651C700C3DB4F /* Client+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820C82DF651C700C3DB4F /* Client+Model.swift */; };
+		0B5820EA2DF651C700C3DB4F /* Client+JobChecklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820C92DF651C700C3DB4F /* Client+JobChecklist.swift */; };
+		0B5820EB2DF651C700C3DB4F /* Client+SiteAssessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820CA2DF651C700C3DB4F /* Client+SiteAssessment.swift */; };
+		0B5820EC2DF651C700C3DB4F /* Client+ContactInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820CC2DF651C700C3DB4F /* Client+ContactInfoView.swift */; };
+		0B5820ED2DF651C700C3DB4F /* Client+DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820CD2DF651C700C3DB4F /* Client+DetailsView.swift */; };
+		0B5820EE2DF651C700C3DB4F /* Client+JobChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820CE2DF651C700C3DB4F /* Client+JobChecklistView.swift */; };
+		0B5820EF2DF651C700C3DB4F /* Client+RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820CF2DF651C700C3DB4F /* Client+RowView.swift */; };
+		0B5820F02DF651C700C3DB4F /* Client+SiteAssessmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820D02DF651C700C3DB4F /* Client+SiteAssessmentView.swift */; };
+		0B5820F12DF651C700C3DB4F /* InventoryItem+DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820D22DF651C700C3DB4F /* InventoryItem+DetailsView.swift */; };
+		0B5820F22DF651C700C3DB4F /* InventoryItem+RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820D32DF651C700C3DB4F /* InventoryItem+RowView.swift */; };
+		0B5820F32DF651C700C3DB4F /* EditableItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820D52DF651C700C3DB4F /* EditableItemView.swift */; };
+		0B5820F42DF651C700C3DB4F /* FormFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820D62DF651C700C3DB4F /* FormFields.swift */; };
+		0B5820F52DF651C700C3DB4F /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820D72DF651C700C3DB4F /* ItemListView.swift */; };
+		0B5820F62DF651C700C3DB4F /* NewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820D82DF651C700C3DB4F /* NewItemView.swift */; };
+		0B5820F72DF651C700C3DB4F /* InventoryItem+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820DA2DF651C700C3DB4F /* InventoryItem+Model.swift */; };
+		0B5820F82DF651C700C3DB4F /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820DB2DF651C700C3DB4F /* Item.swift */; };
+		0B5820F92DF651C700C3DB4F /* ItemListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820DC2DF651C700C3DB4F /* ItemListManager.swift */; };
+		0B5820FA2DF651C700C3DB4F /* AlohaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820E12DF651C700C3DB4F /* AlohaApp.swift */; };
+		0B5820FB2DF651C700C3DB4F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5820E32DF651C700C3DB4F /* ContentView.swift */; };
+		0B5821042DF653C500C3DB4F /* StatefulPreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5821032DF653C500C3DB4F /* StatefulPreviewWrapper.swift */; };
+		0B5821062DF6550700C3DB4F /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5821052DF6550700C3DB4F /* Client.swift */; };
+		0B5821082DF6554C00C3DB4F /* Client+ContactInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5821072DF6554C00C3DB4F /* Client+ContactInfo.swift */; };
+		0B58210A2DF664B400C3DB4F /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5821092DF664B400C3DB4F /* InventoryItem.swift */; };
 		0BE58D662D3DE8870052EFD5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D652D3DE8870052EFD5 /* FirebaseAnalytics */; };
 		0BE58D682D3DE8870052EFD5 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D672D3DE8870052EFD5 /* FirebaseAppCheck */; };
 		0BE58D6A2D3DE8870052EFD5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0BE58D692D3DE8870052EFD5 /* FirebaseAuth */; };
@@ -33,17 +59,39 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B5820C82DF651C700C3DB4F /* Client+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+Model.swift"; sourceTree = "<group>"; };
+		0B5820C92DF651C700C3DB4F /* Client+JobChecklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+JobChecklist.swift"; sourceTree = "<group>"; };
+		0B5820CA2DF651C700C3DB4F /* Client+SiteAssessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+SiteAssessment.swift"; sourceTree = "<group>"; };
+		0B5820CC2DF651C700C3DB4F /* Client+ContactInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ContactInfoView.swift"; sourceTree = "<group>"; };
+		0B5820CD2DF651C700C3DB4F /* Client+DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+DetailsView.swift"; sourceTree = "<group>"; };
+		0B5820CE2DF651C700C3DB4F /* Client+JobChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+JobChecklistView.swift"; sourceTree = "<group>"; };
+		0B5820CF2DF651C700C3DB4F /* Client+RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+RowView.swift"; sourceTree = "<group>"; };
+		0B5820D02DF651C700C3DB4F /* Client+SiteAssessmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+SiteAssessmentView.swift"; sourceTree = "<group>"; };
+		0B5820D22DF651C700C3DB4F /* InventoryItem+DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryItem+DetailsView.swift"; sourceTree = "<group>"; };
+		0B5820D32DF651C700C3DB4F /* InventoryItem+RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryItem+RowView.swift"; sourceTree = "<group>"; };
+		0B5820D52DF651C700C3DB4F /* EditableItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableItemView.swift; sourceTree = "<group>"; };
+		0B5820D62DF651C700C3DB4F /* FormFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormFields.swift; sourceTree = "<group>"; };
+		0B5820D72DF651C700C3DB4F /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		0B5820D82DF651C700C3DB4F /* NewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemView.swift; sourceTree = "<group>"; };
+		0B5820DA2DF651C700C3DB4F /* InventoryItem+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryItem+Model.swift"; sourceTree = "<group>"; };
+		0B5820DB2DF651C700C3DB4F /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		0B5820DC2DF651C700C3DB4F /* ItemListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListManager.swift; sourceTree = "<group>"; };
+		0B5820DE2DF651C700C3DB4F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0B5820E02DF651C700C3DB4F /* AlohaApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlohaApp.entitlements; sourceTree = "<group>"; };
+		0B5820E12DF651C700C3DB4F /* AlohaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlohaApp.swift; sourceTree = "<group>"; };
+		0B5820E22DF651C700C3DB4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0B5820E32DF651C700C3DB4F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0B5820E42DF651C700C3DB4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0B5821032DF653C500C3DB4F /* StatefulPreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefulPreviewWrapper.swift; sourceTree = "<group>"; };
+		0B5821052DF6550700C3DB4F /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		0B5821072DF6554C00C3DB4F /* Client+ContactInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Client+ContactInfo.swift"; sourceTree = "<group>"; };
+		0B5821092DF664B400C3DB4F /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		0BE58D302D3DE34E0052EFD5 /* AlohaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlohaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BE58D412D3DE34F0052EFD5 /* AlohaAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlohaAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BE58D4B2D3DE34F0052EFD5 /* AlohaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlohaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		0BE58D322D3DE34E0052EFD5 /* AlohaApp */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AlohaApp;
-			sourceTree = "<group>";
-		};
 		0BE58D442D3DE34F0052EFD5 /* AlohaAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AlohaAppTests;
@@ -94,10 +142,132 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		0B5820CB2DF651C700C3DB4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820C82DF651C700C3DB4F /* Client+Model.swift */,
+				0B5821072DF6554C00C3DB4F /* Client+ContactInfo.swift */,
+				0B5820CA2DF651C700C3DB4F /* Client+SiteAssessment.swift */,
+				0B5820C92DF651C700C3DB4F /* Client+JobChecklist.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B5820D12DF651C700C3DB4F /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				0B5821052DF6550700C3DB4F /* Client.swift */,
+				0B5820CB2DF651C700C3DB4F /* Model */,
+				0B5820FF2DF6534F00C3DB4F /* View */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		0B5820D42DF651C700C3DB4F /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				0B5821092DF664B400C3DB4F /* InventoryItem.swift */,
+				0B5820FE2DF652E700C3DB4F /* Model */,
+				0B5821002DF6535800C3DB4F /* View */,
+			);
+			path = Inventory;
+			sourceTree = "<group>";
+		};
+		0B5820D92DF651C700C3DB4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820D52DF651C700C3DB4F /* EditableItemView.swift */,
+				0B5820D62DF651C700C3DB4F /* FormFields.swift */,
+				0B5820D72DF651C700C3DB4F /* ItemListView.swift */,
+				0B5820D82DF651C700C3DB4F /* NewItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0B5820DD2DF651C700C3DB4F /* GenericItem */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820D92DF651C700C3DB4F /* View */,
+				0B5821012DF6536400C3DB4F /* Model */,
+				0B5821022DF6538900C3DB4F /* ViewModel */,
+			);
+			path = GenericItem;
+			sourceTree = "<group>";
+		};
+		0B5820DF2DF651C700C3DB4F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820DE2DF651C700C3DB4F /* Preview Assets.xcassets */,
+				0B5821032DF653C500C3DB4F /* StatefulPreviewWrapper.swift */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0B5820E52DF651C700C3DB4F /* AlohaApp */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820E12DF651C700C3DB4F /* AlohaApp.swift */,
+				0B5820E32DF651C700C3DB4F /* ContentView.swift */,
+				0B5820D12DF651C700C3DB4F /* Client */,
+				0B5820D42DF651C700C3DB4F /* Inventory */,
+				0B5820DD2DF651C700C3DB4F /* GenericItem */,
+				0B5820DF2DF651C700C3DB4F /* Preview Content */,
+				0B5820E02DF651C700C3DB4F /* AlohaApp.entitlements */,
+				0B5820E22DF651C700C3DB4F /* Assets.xcassets */,
+				0B5820E42DF651C700C3DB4F /* GoogleService-Info.plist */,
+			);
+			path = AlohaApp;
+			sourceTree = "<group>";
+		};
+		0B5820FE2DF652E700C3DB4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820DA2DF651C700C3DB4F /* InventoryItem+Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B5820FF2DF6534F00C3DB4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820CF2DF651C700C3DB4F /* Client+RowView.swift */,
+				0B5820CD2DF651C700C3DB4F /* Client+DetailsView.swift */,
+				0B5820CC2DF651C700C3DB4F /* Client+ContactInfoView.swift */,
+				0B5820D02DF651C700C3DB4F /* Client+SiteAssessmentView.swift */,
+				0B5820CE2DF651C700C3DB4F /* Client+JobChecklistView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0B5821002DF6535800C3DB4F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820D22DF651C700C3DB4F /* InventoryItem+DetailsView.swift */,
+				0B5820D32DF651C700C3DB4F /* InventoryItem+RowView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0B5821012DF6536400C3DB4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820DB2DF651C700C3DB4F /* Item.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B5821022DF6538900C3DB4F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0B5820DC2DF651C700C3DB4F /* ItemListManager.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0BE58D272D3DE34E0052EFD5 = {
 			isa = PBXGroup;
 			children = (
-				0BE58D322D3DE34E0052EFD5 /* AlohaApp */,
+				0B5820E52DF651C700C3DB4F /* AlohaApp */,
 				0BE58D442D3DE34F0052EFD5 /* AlohaAppTests */,
 				0BE58D4E2D3DE34F0052EFD5 /* AlohaAppUITests */,
 				0B5820C02DF61B8300C3DB4F /* Frameworks */,
@@ -129,9 +299,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				0BE58D322D3DE34E0052EFD5 /* AlohaApp */,
 			);
 			name = AlohaApp;
 			packageProductDependencies = (
@@ -244,6 +411,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5820E62DF651C700C3DB4F /* Preview Assets.xcassets in Resources */,
+				0B5820E72DF651C700C3DB4F /* Assets.xcassets in Resources */,
+				0B5820E82DF651C700C3DB4F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +438,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B5820E92DF651C700C3DB4F /* Client+Model.swift in Sources */,
+				0B5820EA2DF651C700C3DB4F /* Client+JobChecklist.swift in Sources */,
+				0B5820EB2DF651C700C3DB4F /* Client+SiteAssessment.swift in Sources */,
+				0B58210A2DF664B400C3DB4F /* InventoryItem.swift in Sources */,
+				0B5820EC2DF651C700C3DB4F /* Client+ContactInfoView.swift in Sources */,
+				0B5820ED2DF651C700C3DB4F /* Client+DetailsView.swift in Sources */,
+				0B5820EE2DF651C700C3DB4F /* Client+JobChecklistView.swift in Sources */,
+				0B5820EF2DF651C700C3DB4F /* Client+RowView.swift in Sources */,
+				0B5820F02DF651C700C3DB4F /* Client+SiteAssessmentView.swift in Sources */,
+				0B5821062DF6550700C3DB4F /* Client.swift in Sources */,
+				0B5821082DF6554C00C3DB4F /* Client+ContactInfo.swift in Sources */,
+				0B5820F12DF651C700C3DB4F /* InventoryItem+DetailsView.swift in Sources */,
+				0B5820F22DF651C700C3DB4F /* InventoryItem+RowView.swift in Sources */,
+				0B5820F32DF651C700C3DB4F /* EditableItemView.swift in Sources */,
+				0B5820F42DF651C700C3DB4F /* FormFields.swift in Sources */,
+				0B5820F52DF651C700C3DB4F /* ItemListView.swift in Sources */,
+				0B5820F62DF651C700C3DB4F /* NewItemView.swift in Sources */,
+				0B5821042DF653C500C3DB4F /* StatefulPreviewWrapper.swift in Sources */,
+				0B5820F72DF651C700C3DB4F /* InventoryItem+Model.swift in Sources */,
+				0B5820F82DF651C700C3DB4F /* Item.swift in Sources */,
+				0B5820F92DF651C700C3DB4F /* ItemListManager.swift in Sources */,
+				0B5820FA2DF651C700C3DB4F /* AlohaApp.swift in Sources */,
+				0B5820FB2DF651C700C3DB4F /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

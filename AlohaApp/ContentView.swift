@@ -5,20 +5,21 @@
 //  Created by Jordan Kopp on 1/19/25.
 //
 
+import Foundation
 import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    private let clientItemListManager = ItemListManager<Client>()
-    private let inventoryItemListManager = ItemListManager<InventoryItem>()
+    private let clientItemListManager = ItemListManager<Client.Model>()
+    private let inventoryItemListManager = ItemListManager<InventoryItem.Model>()
     
     var body: some View {
         TabView {
             NavigationStack {
                 ItemListView(title: "Clients", itemListManager: clientItemListManager) { item in
-                    ClientRowView(client: item)
+                    Client.RowView(clientModel: item)
                 } detailsContent: { item in
-                    ClientDetailsView(client: item)
+                    Client.DetailsView(clientModel: item, inventoryItemNames: inventoryItemListManager.items.map { $0.name })
                 }
             }
             .tabItem {
@@ -26,14 +27,18 @@ struct ContentView: View {
             }
             NavigationStack {
                 ItemListView(title: "Inventory", itemListManager: inventoryItemListManager) { item in
-                    InventoryItemRowView(inventoryItem: item)
+                    InventoryItem.RowView(inventoryItemModel: item)
                 } detailsContent: { item in
-                    InventoryItemDetailsView(inventoryItem: item)
+                    InventoryItem.DetailsView(inventoryItemModel: item)
                 }
             }
             .tabItem {
                 Label("Inventory", systemImage: "truck.box")
             }
+        }
+        .onAppear {
+            clientItemListManager.startFetchingItems()
+            inventoryItemListManager.startFetchingItems()
         }
     }
 }

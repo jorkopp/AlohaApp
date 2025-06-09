@@ -5,6 +5,7 @@
 //  Created by Jordan Kopp on 1/19/25.
 //
 
+import Foundation
 import SwiftUI
 import FirebaseCore
 import FirebaseAuth

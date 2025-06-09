@@ -5,15 +5,15 @@
 //  Created by Jordan Kopp on 5/26/25.
 //
 
+import Foundation
 import SwiftUI
 
 @MainActor
-public struct YearPicker: View {
+struct YearPicker: View {
     let title: String
-    
     @Binding var selectedYear: Int?
 
-    public var body: some View {
+    var body: some View {
         Picker(title, selection: $selectedYear) {
             Text("Select year").tag(nil as Int?)
             ForEach((1800...Calendar.current.component(.year, from: Date())).reversed(), id: \.self) { year in
@@ -24,12 +24,12 @@ public struct YearPicker: View {
 }
 
 @MainActor
-public struct LabeledNumberField: View {
+struct LabeledNumberField: View {
     let label: String
     let placeholder: String
     @Binding var value: String
 
-    public var body: some View {
+    var body: some View {
         LabeledContent(label) {
             TextField(placeholder, text: $value)
                 .multilineTextAlignment(.trailing)
@@ -42,12 +42,12 @@ public struct LabeledNumberField: View {
 }
 
 @MainActor
-public struct LabeledTextField: View {
+struct LabeledTextField: View {
     let label: String
     let placeholder: String
     @Binding var value: String
 
-    public var body: some View {
+    var body: some View {
         LabeledContent(label) {
             TextField(placeholder, text: $value)
                 .multilineTextAlignment(.trailing)
@@ -56,11 +56,11 @@ public struct LabeledTextField: View {
 }
 
 @MainActor
-public struct OptionPicker<T>: View where T: RawRepresentable & CaseIterable & Hashable, T.RawValue: StringProtocol {
+struct OptionPicker<T>: View where T: RawRepresentable & CaseIterable & Hashable, T.RawValue: StringProtocol {
     let label: String
     @Binding var selection: T?
     
-    public var body: some View {
+    var body: some View {
         Picker(label, selection: $selection) {
             Text("Select option").tag(Optional<T>.none)
             ForEach(Array(T.allCases), id: \.self) {
@@ -68,8 +68,4 @@ public struct OptionPicker<T>: View where T: RawRepresentable & CaseIterable & H
             }
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

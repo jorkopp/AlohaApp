@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import SwiftUI
 
 @MainActor
@@ -39,9 +38,6 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
                 }
             }
         }
-        .onAppear {
-            itemListManager.startFetchingItems()
-        }
         .navigationTitle(title)
         .toolbar {
             if !itemListManager.items.isEmpty {
@@ -65,7 +61,7 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
                 }
             }
         }
-        .alert("Are you sure you want to delete this \(String(describing: T.self))?", isPresented: $isShowingDeleteAlert) {
+        .alert("Are you sure you want to delete this \(T.name)?", isPresented: $isShowingDeleteAlert) {
             Button("Delete", role: .destructive) {
                 if let indexSet = indexSetToDelete {
                     for index in indexSet {

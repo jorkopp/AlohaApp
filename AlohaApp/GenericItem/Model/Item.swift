@@ -13,6 +13,8 @@ protocol Sortable {
 }
 
 protocol Item: Identifiable, Codable, Hashable, Sortable {
+    static var name: String { get }
+    
     static var collectionPath: String { get }
     
     var id: String? { get }

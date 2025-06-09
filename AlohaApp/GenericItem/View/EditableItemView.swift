@@ -5,6 +5,7 @@
 //  Created by Jordan Kopp on 5/25/25.
 //
 
+import Foundation
 import SwiftUI
 
 @MainActor
@@ -36,7 +37,8 @@ struct EditableItemView<T: Item, DetailsContent: View>: View {
     }
 }
 
-#Preview {
-    ContentView()
+extension Optional where Wrapped == Binding<EditMode> {
+    var isEditing: Bool {
+        self?.wrappedValue.isEditing ?? false
+    }
 }
-
