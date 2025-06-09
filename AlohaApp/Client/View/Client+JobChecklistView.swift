@@ -33,7 +33,7 @@ extension Client {
                                 Button(role: .destructive) {
                                     checklist.items.remove(at: pair.offset)
                                 } label: {
-                                    Image(systemName: "minus.circle")
+                                    Image(systemName: "minus.circle.fill")
                                 }
                             }
                             ChecklistRowView(item: $checklist.items[pair.offset])

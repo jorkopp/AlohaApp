@@ -177,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				0B5820D52DF651C700C3DB4F /* EditableItemView.swift */,
-				0B5820D62DF651C700C3DB4F /* FormFields.swift */,
 				0B5820D72DF651C700C3DB4F /* ItemListView.swift */,
 				0B5820D82DF651C700C3DB4F /* NewItemView.swift */,
 			);
@@ -187,9 +186,9 @@
 		0B5820DD2DF651C700C3DB4F /* GenericItem */ = {
 			isa = PBXGroup;
 			children = (
-				0B5820D92DF651C700C3DB4F /* View */,
 				0B5821012DF6536400C3DB4F /* Model */,
 				0B5821022DF6538900C3DB4F /* ViewModel */,
+				0B5820D92DF651C700C3DB4F /* View */,
 			);
 			path = GenericItem;
 			sourceTree = "<group>";
@@ -211,6 +210,7 @@
 				0B5820D12DF651C700C3DB4F /* Client */,
 				0B5820D42DF651C700C3DB4F /* Inventory */,
 				0B5820DD2DF651C700C3DB4F /* GenericItem */,
+				0B5820D62DF651C700C3DB4F /* FormFields.swift */,
 				0B5820DF2DF651C700C3DB4F /* Preview Content */,
 				0B5820E02DF651C700C3DB4F /* AlohaApp.entitlements */,
 				0B5820E22DF651C700C3DB4F /* Assets.xcassets */,
