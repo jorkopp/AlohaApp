@@ -80,7 +80,7 @@ extension Client {
         
         @ViewBuilder
         func emailField(_ label: String) -> some View {
-            if editMode.isEditing {
+            if editMode.isEditing { 
                 LabeledContent(label) {
                     TextField(label, text: $contactInfo.email)
                         .multilineTextAlignment(.trailing)
