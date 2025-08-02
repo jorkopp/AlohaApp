@@ -15,11 +15,12 @@ extension Client {
         
         var body: some View {
             HStack {
+                if (clientModel.contactInfo.signOnSite) {
+                    Image(systemName: "flag.fill")
+                        .foregroundStyle(.red)
+                }
                 Text(clientModel.contactInfo.name)
                 Spacer()
-                if (clientModel.contactInfo.signOnSite) {
-                    Image(systemName: "house.and.flag")
-                }
             }
         }
     }
