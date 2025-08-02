@@ -15,6 +15,7 @@ extension InventoryItem {
         
         @DocumentID var id: String?
         var name: String = ""
+        var category: String = ""
         var price: Float = 0
         var count: String = ""
         

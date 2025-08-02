@@ -14,7 +14,13 @@ extension Client {
         let clientModel: Model
         
         var body: some View {
-            Text(clientModel.contactInfo.name)
+            HStack {
+                Text(clientModel.contactInfo.name)
+                Spacer()
+                if (clientModel.contactInfo.signOnSite) {
+                    Image(systemName: "house.and.flag")
+                }
+            }
         }
     }
 }

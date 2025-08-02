@@ -16,21 +16,25 @@ struct ContentView: View {
     var body: some View {
         TabView {
             NavigationStack {
-                ItemListView(title: "Clients", itemListManager: clientItemListManager) { item in
-                    Client.RowView(clientModel: item)
-                } detailsContent: { item in
-                    Client.DetailsView(clientModel: item, inventoryItemNames: inventoryItemListManager.items.map { $0.name })
-                }
+                ItemListView(
+                    title: "Clients",
+                    itemListManager: clientItemListManager,
+                    rowContent: { Client.RowView(clientModel: $0) },
+                    detailsContent: { Client.DetailsView(clientModel: $0, inventoryItemNames: inventoryItemListManager.items.map { $0.name }) },
+                    sectionForItem: { $0.contactInfo.active ? "Active" : "Inactive" }
+                )
             }
             .tabItem {
                 Label("Clients", systemImage: "person")
             }
             NavigationStack {
-                ItemListView(title: "Inventory", itemListManager: inventoryItemListManager) { item in
-                    InventoryItem.RowView(inventoryItemModel: item)
-                } detailsContent: { item in
-                    InventoryItem.DetailsView(inventoryItemModel: item)
-                }
+                ItemListView(
+                    title: "Inventory",
+                    itemListManager: inventoryItemListManager,
+                    rowContent: { InventoryItem.RowView(inventoryItemModel: $0) },
+                    detailsContent: { InventoryItem.DetailsView(inventoryItemModel: $0) },
+                    sectionForItem: { if $0.category.count == 0 { "Uncategorized" } else { $0.category } }
+                )
             }
             .tabItem {
                 Label("Inventory", systemImage: "truck.box")

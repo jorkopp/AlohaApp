@@ -15,25 +15,38 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
     
     let rowContent: (T) -> RowContent
     let detailsContent: (Binding<T>) -> DetailsContent
+    let sectionForItem: ((T) -> String)?
     
     @State private var isAddingNewItem = false
     
     var body: some View {
         Group {
+            let itemsBySection: [String: [T]]? = if let sectionForItem { Dictionary(grouping: itemListManager.items, by: sectionForItem) } else { nil }
             List {
-                ForEach(itemListManager.items, id: \.self) { item in
-                    NavigationLink {
-                        EditableItemView(itemListManager: itemListManager, item: item) { item in
-                            detailsContent(item)
+                if let itemsBySection {
+                    ForEach(itemsBySection.keys.sorted(), id: \.self) { section in
+                        Section(header: Text(section)) {
+                            let sectionItems = itemsBySection[section, default: []]
+                            ForEach(sectionItems, id: \.self) { item in
+                                listItem(item)
+                            }
+                            .onDelete { indexSet in
+                                for index in indexSet {
+                                    let itemToDelete = sectionItems[index]
+                                    itemListManager.delete(itemToDelete)
+                                }
+                            }
                         }
-                    } label: {
-                        rowContent(item)
                     }
-                }
-                .onDelete { indexSet in
-                    for index in indexSet {
-                        let itemToDelete = itemListManager.items[index]
-                        itemListManager.delete(itemToDelete)
+                } else {
+                    ForEach(itemListManager.items, id: \.self) { item in
+                        listItem(item)
+                    }
+                    .onDelete { indexSet in
+                        for index in indexSet {
+                            let itemToDelete = itemListManager.items[index]
+                            itemListManager.delete(itemToDelete)
+                        }
                     }
                 }
             }
@@ -57,6 +70,17 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
             NewItemView(itemListManager: itemListManager) { item in
                 detailsContent(item)
             }
+        }
+    }
+    
+    @ViewBuilder
+    func listItem(_ item: T) -> some View {
+        NavigationLink {
+            EditableItemView(itemListManager: itemListManager, item: item) { item in
+                detailsContent(item)
+            }
+        } label: {
+            rowContent(item)
         }
     }
 }

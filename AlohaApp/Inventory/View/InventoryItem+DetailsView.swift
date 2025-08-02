@@ -22,6 +22,7 @@ extension InventoryItem {
         var body: some View {
             Form {
                 nameField("Name")
+                categoryField("Category")
                 countField("Count")
             }
         }
@@ -29,10 +30,21 @@ extension InventoryItem {
         @ViewBuilder
         func nameField(_ label: String) -> some View {
             if isEditing {
-                LabeledTextField(label: label, placeholder: "e.g. Valve", value: $inventoryItemModel.name)
+                LabeledTextField(label: label, placeholder: "e.g. Sprinkler valve", value: $inventoryItemModel.name)
             } else {
                 LabeledContent(label) {
                     Text(inventoryItemModel.name)
+                }
+            }
+        }
+        
+        @ViewBuilder
+        func categoryField(_ label: String) -> some View {
+            if isEditing {
+                LabeledTextField(label: label, placeholder: "e.g. Timers & Valves", value: $inventoryItemModel.category)
+            } else {
+                LabeledContent(label) {
+                    Text(inventoryItemModel.category)
                 }
             }
         }
