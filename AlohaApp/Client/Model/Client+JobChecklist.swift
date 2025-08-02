@@ -16,7 +16,8 @@ extension Client {
     }
     
     struct ChecklistItem: Codable, Equatable, Hashable {
-        var name: String = "Untitled"
+        var name: String = ""
+        var category: String = ""
         var quantity: String = ""
     }
 }

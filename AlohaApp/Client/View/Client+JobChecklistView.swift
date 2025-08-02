@@ -32,6 +32,7 @@ extension Client {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color(.systemGroupedBackground))
                 } else {
+                    // TODO: Add sections using checklist item categories
                     List {
                         ForEach(checklist.items.enumerated().sorted(by: { $0.element.name < $1.element.name }), id: \.offset) { pair in
                             HStack {
