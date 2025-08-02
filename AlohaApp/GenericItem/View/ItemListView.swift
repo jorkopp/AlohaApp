@@ -17,8 +17,6 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
     let detailsContent: (Binding<T>) -> DetailsContent
     
     @State private var isAddingNewItem = false
-    @State private var isShowingDeleteAlert: Bool = false
-    @State private var indexSetToDelete: IndexSet?
     
     var body: some View {
         Group {
@@ -33,8 +31,10 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
                     }
                 }
                 .onDelete { indexSet in
-                    isShowingDeleteAlert = true
-                    indexSetToDelete = indexSet
+                    for index in indexSet {
+                        let itemToDelete = itemListManager.items[index]
+                        itemListManager.delete(itemToDelete)
+                    }
                 }
             }
         }
@@ -56,19 +56,6 @@ struct ItemListView<T: Item, RowContent: View, DetailsContent: View>: View {
         .navigationDestination(isPresented: $isAddingNewItem) {
             NewItemView(itemListManager: itemListManager) { item in
                 detailsContent(item)
-            }
-        }
-        .alert("Are you sure you want to delete this \(T.name)?", isPresented: $isShowingDeleteAlert) {
-            Button("Delete", role: .destructive) {
-                if let indexSet = indexSetToDelete {
-                    for index in indexSet {
-                        let itemToDelete = itemListManager.items[index]
-                        itemListManager.delete(itemToDelete)
-                    }
-                }
-            }
-            Button("Cancel", role: .cancel) {
-                indexSetToDelete = nil
             }
         }
     }
