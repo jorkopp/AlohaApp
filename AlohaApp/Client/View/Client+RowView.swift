@@ -17,7 +17,7 @@ extension Client {
             HStack {
                 if (clientModel.contactInfo.signOnSite) {
                     Image(systemName: "flag.fill")
-                        .foregroundStyle(.red)
+                        .foregroundStyle(.blue)
                 }
                 Text(clientModel.contactInfo.name)
                 Spacer()
